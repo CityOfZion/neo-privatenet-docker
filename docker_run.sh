@@ -2,7 +2,6 @@
 
 # Spylse Inc. 2017
 
-cd "$(dirname "$(readlink -f "$0")")"
 
 CONTAINER=$(docker ps -aqf name=neo-privnet)
 
@@ -14,4 +13,4 @@ if [ -n "$CONTAINER" ]; then
 fi
 
 echo "Starting container..."
-docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -h neo-privnet neo-privnet /usr/bin/python /opt/neo-mininet.py
+docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -h neo-privnet neo-privnet /bin/bash /opt/private_chain_start.sh /opt/
