@@ -24,7 +24,7 @@ You will also need to install and configure the neo-gui pc client on your favori
   
   https://github.com/CityOfZion/neo-gui-developer
   
-  Edit the protocol.json in your respectiv neo-gui installation to point to the IP of the system running your docker.
+  Edit the protocol.json in your respective neo-gui installation to point to the IP of the system running your docker.
   Please note the ports should match. A sample is provided.
   
   Find the section that looks like the following:
