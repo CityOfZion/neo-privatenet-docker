@@ -17,6 +17,13 @@ You will also need to install and configure the neo-gui pc client on your favori
     ./docker_run.sh
   
   
+  ## Install neo-gui or neo-gui developer
+  
+  https://github.com/neo-project/neo-gui
+  
+  https://github.com/CityOfZion/neo-gui-developer
+  
+  
   ## Extracting Neo and Gas
   Check out the docs at http://docs.neo.org/en-us/node/private-chain.html for instructions on how to claim Neo and Gas
   for testing.
