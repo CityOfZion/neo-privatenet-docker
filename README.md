@@ -27,7 +27,7 @@ You will also need to install and configure the neo-gui pc client on your favori
   Edit the protocol.json in your respective neo-gui installation to point to the IP of the system running your docker.
   Please note the ports listed match the private chain ports in the current docker build. 
   
-  Find the section in your neo-gui protocol.json that looks like the following:
+  If you copy the protocol.json file from the configs directory of this repo and replace your neo-gui protocol.json you will only need to find and edit the section that looks like the following:
   
     "SeedList": [
       "127.0.0.1:20333",
