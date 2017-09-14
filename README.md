@@ -36,7 +36,7 @@ You will also need to install and configure the neo-gui pc client on your favori
       "127.0.0.1:20336"
     ],
   
-  Change the 127.0.0.1 to the IP of the system or vm running your docker image.
+  Change each occurrence of 127.0.0.1 to the IP of the system or vm running your docker image.
   
   ## Extracting Neo and Gas
   Check out the docs at http://docs.neo.org/en-us/node/private-chain.html for instructions on how to claim Neo and Gas
