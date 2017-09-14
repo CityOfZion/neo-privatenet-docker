@@ -18,11 +18,25 @@ You will also need to install and configure the neo-gui pc client on your favori
   
   
   ## Install neo-gui or neo-gui developer
+  Install one of the following: 
   
   https://github.com/neo-project/neo-gui
   
   https://github.com/CityOfZion/neo-gui-developer
   
+  Edit the protocol.json in your respectiv neo-gui installation to point to the IP of the system running your docker.
+  Please note the ports should match. A sample is provided.
+  
+  Find the section that looks like the following:
+  
+    "SeedList": [
+      "127.0.0.1:20333",
+      "127.0.0.1:20334",
+      "127.0.0.1:20335",
+      "127.0.0.1:20336"
+    ],
+  
+  Change the 127.0.0.1 to the IP of the system or vm running your docker image.
   
   ## Extracting Neo and Gas
   Check out the docs at http://docs.neo.org/en-us/node/private-chain.html for instructions on how to claim Neo and Gas
