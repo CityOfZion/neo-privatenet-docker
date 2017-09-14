@@ -14,9 +14,7 @@ You will also need to install and configure the neo-gui pc client on your favori
   git clone https://github.com/Splyse/neo-privatenet-docker.git
   
     cd neo-privatenet-docker
-  
     ./docker_build.sh
-  
     ./docker_run.sh
   
   
