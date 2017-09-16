@@ -6,6 +6,7 @@ MAINTAINER hal0x2328
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y apt-utils
 RUN apt-get install -y mininet netcat curl wget unzip less python screen
 RUN apt-get install -y ca-certificates apt-transport-https
 RUN apt-get install -y libleveldb-dev sqlite3 libsqlite3-dev
