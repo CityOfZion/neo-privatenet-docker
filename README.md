@@ -38,6 +38,12 @@ You will also need to install and configure the neo-gui pc client on your favori
   
   Change each occurrence of 127.0.0.1 to the IP of the system or vm running your docker image.
   
+  
+  If you don't copy the protocol.json from the docker configs directory of this repo, in addition to the "SeedList" modifications mentioned above, you will also need to edit the following:
+  
+  1. Change value "Magic" to 56753
+  2. Copy the public keys of each of your node wallets into the "StandbyValidators" section
+  
   ## Copy wallets from docker image to neo-gui
   
   Once your docker image is running, use the following commands to copy each node's wallet to your neo-gui home directory in preparation for multiparty signature and neo/gas extraction. 
