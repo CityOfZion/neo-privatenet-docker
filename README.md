@@ -17,7 +17,7 @@ You will also need to install and configure the neo-gui pc client on your favori
     ./docker_run.sh
   
 or
-    docker pull splyse/neo-privnet
+    `docker pull splyse/neo-privnet`
   
   ## Install neo-gui or neo-gui-developer
   Install one of the following: 
