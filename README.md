@@ -17,7 +17,7 @@ You will also need to install and configure the neo-gui pc client on your favori
     ./docker_run.sh
   
   
-  ## Install neo-gui or neo-gui developer
+  ## Install neo-gui or neo-gui-developer
   Install one of the following: 
   
   https://github.com/neo-project/neo-gui
@@ -38,9 +38,23 @@ You will also need to install and configure the neo-gui pc client on your favori
   
   Change each occurrence of 127.0.0.1 to the IP of the system or vm running your docker image.
   
-  ## Extracting Neo and Gas
-  Check out the docs at http://docs.neo.org/en-us/node/private-chain.html for instructions on how to claim Neo and Gas
-  for testing.
+  
+  If you don't copy the protocol.json from the docker configs directory of this repo, in addition to the "SeedList" modifications mentioned above, you will also need to edit the following:
+  
+  1. Change value "Magic" to 56753
+  2. Copy the public keys of each of your node wallets into the "StandbyValidators" section
+  
+  ## Copy wallets from docker image to neo-gui
+  
+  Once your docker image is running, use the following commands to copy each node's wallet to your neo-gui home directory in preparation for multiparty signature and neo/gas extraction. 
+  Note: all four must be copied. 
+  
+  The following will copy each wallet from the docker image to the current working directory.
+  
+     docker cp neo-privnet:/opt/node1/neo-cli/wallet1.db3 .
+     docker cp neo-privnet:/opt/node2/neo-cli/wallet2.db3 .
+     docker cp neo-privnet:/opt/node3/neo-cli/wallet3.db3 .
+     docker cp neo-privnet:/opt/node4/neo-cli/wallet4.db3 .
   
   ## Wallet Passwords
   node1: one
@@ -50,3 +64,7 @@ You will also need to install and configure the neo-gui pc client on your favori
   node3: three
   
   node4: four
+  
+  ## Extracting Neo and Gas
+  Check out the docs at http://docs.neo.org/en-us/node/private-chain.html for instructions on how to claim Neo and Gas
+  for testing.
