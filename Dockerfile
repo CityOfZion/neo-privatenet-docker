@@ -17,7 +17,7 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu
 
 RUN apt-get update && apt-get install -y dotnet-sdk-2.0.0
 
-RUN wget -O /opt/neo-cli.zip https://github.com/neo-project/neo-cli/releases/download/v2.3.2/neo-cli-ubuntu.16.04-x64.zip
+RUN wget -O /opt/neo-cli.zip https://github.com/neo-project/neo-cli/releases/download/v2.3.5/neo-cli-ubuntu.16.04-x64.zip
 
 RUN unzip -d /opt/node1 /opt/neo-cli.zip
 RUN unzip -d /opt/node2 /opt/neo-cli.zip
