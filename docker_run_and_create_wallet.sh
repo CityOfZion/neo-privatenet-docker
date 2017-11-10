@@ -16,11 +16,13 @@
 
 ./docker_run.sh
 
+WALLET_PWD="coz"
+
 echo "Waiting 10 seconds to let consensus nodes start..."
 sleep 10
 
 echo "Starting script to claim NEO and GAS..."
-CLAIM_CMD="python3.5 /opt/neo-python/contrib/privnet-claim-neo-and-gas.py -o /tmp/wallet -p neo -w /tmp/wif"
+CLAIM_CMD="python3.5 /opt/neo-python/contrib/privnet-claim-neo-and-gas.py -o /tmp/wallet -p ${WALLET_PWD} -w /tmp/wif"
 DOCKER_CMD="docker exec -it neo-privnet ${CLAIM_CMD}"
 echo $DOCKER_CMD
 echo
@@ -36,7 +38,7 @@ echo "--------------------"
 echo
 echo "All done! You now have 2 files in the current directory:"
 echo
-echo "  neo-privnet.wallet .. a wallet you can use with neo-python (pwd: neo)"
+echo "  neo-privnet.wallet .. a wallet you can use with neo-python (pwd: ${WALLET_PWD})"
 echo "  neo-privnet.wif ..... a wif private key you can import into other clients"
 echo
 echo "Enjoy!"

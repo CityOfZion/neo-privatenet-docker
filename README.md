@@ -22,7 +22,7 @@ Just start the private networkL
 
     ./docker_run.sh
 
-Start the private network, create a wallet and have the initial NEO and GAS automatically claimed:
+Start the private network, create a wallet and automatically claim the initial NEO and 48 GAS (takes about 5 minutes):
 
     ./docker_run_and_create_wallet.sh
 
