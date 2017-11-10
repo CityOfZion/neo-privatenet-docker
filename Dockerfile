@@ -5,6 +5,9 @@ LABEL maintainer="hal0x2328"
 
 ENV DEBIAN_FRONTEND noninteractive
 
+# Disable dotnet usage information collection
+ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+
 # Install system dependencies. always should be done in one line
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
 RUN apt-get update && apt-get install -y \
