@@ -1,5 +1,2 @@
-#!/bin/bash 
-
-# Splyse, Inc. 2017
-
+#!/bin/bash
 docker build -t neo-privnet .

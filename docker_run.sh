@@ -1,8 +1,8 @@
 #!/bin/bash
-
-# Spylse Inc. 2017
-
-
+#
+# Start a Docker container which runs the four consensus nodes. If it is
+# already running, it will be destroyed first.
+#
 CONTAINER=$(docker ps -aqf name=neo-privnet)
 
 if [ -n "$CONTAINER" ]; then
@@ -13,4 +13,4 @@ if [ -n "$CONTAINER" ]; then
 fi
 
 echo "Starting container..."
-docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -h neo-privnet neo-privnet /bin/bash /opt/private_chain_start.sh /opt/
+docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -h neo-privnet neo-privnet
