@@ -68,5 +68,10 @@ EXPOSE 20334
 EXPOSE 20335
 EXPOSE 20336
 
+EXPOSE 30333
+EXPOSE 30334
+EXPOSE 30335
+EXPOSE 30336
+
 # On docker run, start the consensus nodes
 CMD ["/bin/bash", "/opt/run.sh"]
