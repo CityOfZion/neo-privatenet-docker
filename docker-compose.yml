@@ -1,0 +1,14 @@
+version: '3'
+services:
+  neo-privnet:
+    build: .
+    container_name: neo-privnet
+    ports:
+      - 10333-10336:10333-10336
+      - 20333-20336:20333-20336
+      - 30333-30336:30333-30336
+    volumes:
+      - /opt/node1/neo-cli/Chain
+      - /opt/node2/neo-cli/Chain
+      - /opt/node3/neo-cli/Chain
+      - /opt/node4/neo-cli/Chain
