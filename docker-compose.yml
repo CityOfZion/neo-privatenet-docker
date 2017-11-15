@@ -2,7 +2,6 @@ version: '3'
 services:
   neo-privnet:
     build: .
-    command: /bin/bash /opt/private_chain_start.sh /opt/
     container_name: neo-privnet
     ports:
       - 10333-10336:10333-10336
