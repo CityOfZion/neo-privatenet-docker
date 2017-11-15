@@ -13,4 +13,4 @@ if [ -n "$CONTAINER" ]; then
 fi
 
 echo "Starting container..."
-docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -h neo-privnet neo-privnet
+docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -p 30333-30336:30333-30336/tcp -h neo-privnet neo-privnet
