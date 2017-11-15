@@ -18,7 +18,7 @@ Clone the repository and build the Docker image:
     cd neo-privatenet-docker
     ./docker_build.sh
 
-Just start the private networkL
+Just start the private network:
 
     ./docker_run.sh
 
@@ -26,6 +26,13 @@ Start the private network, create a wallet and automatically claim the initial N
 
     ./docker_run_and_create_wallet.sh
 
+_or_, if you prefer `docker-compose`, you can start the nodes with:
+
+    docker-compose up -d
+
+You can now claim the initial NEO and GAS:
+
+   ./create_wallet.sh
 
 ## Install neo-gui or neo-gui-developer
 
