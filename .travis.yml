@@ -1,0 +1,18 @@
+# See also: https://docs.travis-ci.com/user/docker/
+sudo: required
+
+language: python
+python:
+  - "3.5"
+
+services:
+  - docker
+
+
+before_install:
+  - docker build -t neo-privnet .
+  - docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -p 30333-30336:30333-30336/tcp -h neo-privnet neo-privnet
+  - docker ps -a
+
+script:
+  - ./create_wallet.sh
