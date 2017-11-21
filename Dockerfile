@@ -59,7 +59,7 @@ ADD ./scripts/start_consensus_node.sh /opt/
 
 # neo-python setup
 RUN git clone https://github.com/CityOfZion/neo-python.git /opt/neo-python
-RUN cd /opt/neo-python && git checkout origin/development -b development
+RUN cd /opt/neo-python && git checkout 87b5ff24f4dff5ec939032ded29226d27b3adaa0 -b dev-fixed
 RUN pip3 install -r /opt/neo-python/requirements.txt
 
 # Inform Docker what ports to expose
