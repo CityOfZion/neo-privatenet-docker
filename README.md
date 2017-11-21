@@ -32,7 +32,14 @@ _or_, if you prefer `docker-compose`, you can start the nodes with:
 
 You can now claim the initial NEO and GAS:
 
-   ./create_wallet.sh
+    ./create_wallet.sh
+
+`./create_wallet` will display several internal error messages, which is expected as long as at the end you still get a success message.
+
+---
+
+There is also a turnkey Docker image with the initial 100m NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/metachris/neo-privnet-with-gas/
+
 
 ## Install neo-gui or neo-gui-developer
 
