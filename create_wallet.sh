@@ -3,7 +3,7 @@
 WALLET_PWD="coz"
 
 echo "Starting script to claim NEO and GAS..."
-CLAIM_CMD="python3.5 /opt/neo-python/contrib/privnet-claim-neo-and-gas.py -o /tmp/wallet -p ${WALLET_PWD} -w /tmp/wif"
+CLAIM_CMD="python3.5 /opt/neo-python/scripts/privnet-claim-neo-and-gas.py -o /tmp/wallet -p ${WALLET_PWD} -w /tmp/wif"
 DOCKER_CMD="docker exec -it neo-privnet ${CLAIM_CMD}"
 echo $DOCKER_CMD
 echo
