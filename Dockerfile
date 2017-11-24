@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y dotnet-sdk-2.0.0
 RUN rm -rf /var/lib/apt/lists/*
 
 # Download neo-cli
-RUN wget -O /opt/neo-cli.zip https://github.com/neo-project/neo-cli/releases/download/v2.3.5/neo-cli-ubuntu.16.04-x64.zip
+RUN wget -O /opt/neo-cli.zip https://github.com/neo-project/neo-cli/releases/download/v2.4.1/neo-cli-ubuntu.16.04-x64.zip
 
 # Extract and prepare four consensus nodes
 RUN unzip -d /opt/node1 /opt/neo-cli.zip
@@ -59,7 +59,7 @@ ADD ./scripts/start_consensus_node.sh /opt/
 
 # neo-python setup
 RUN git clone https://github.com/CityOfZion/neo-python.git /opt/neo-python
-RUN cd /opt/neo-python && git checkout origin/development -b development
+RUN cd /opt/neo-python && git checkout 87b5ff24f4dff5ec939032ded29226d27b3adaa0 -b dev-fixed
 RUN pip3 install -r /opt/neo-python/requirements.txt
 
 # Inform Docker what ports to expose
