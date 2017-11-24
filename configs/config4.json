@@ -1,16 +1,17 @@
 ﻿{
   "ApplicationConfiguration": {
-    "DataDirectoryPath": "Chain",
-    "CertCachePath": "Certs",
-    "NodePort": 20336,
-    "WsPort": 10336,
-    "UriPrefix": [ "http://*:30336" ],
-    "SslCert": "",
-    "SslCertPassword": "",
-    "Urls": {
-      "AddressUrl": "https://www.antchain.xyz/address/{0}",
-      "AssetUrl": "https://www.antchain.xyz/asset/hash/{0}",
-      "TransactionUrl": "https://www.antchain.xyz/tx/hash/{0}"
+    "Paths": {
+      "Chain": "Chain",
+      "Notifications": "Notifications"
+    },
+    "P2P": {
+      "Port": 20336,
+      "WsPort": 10336
+    },
+    "RPC": {
+      "Port": 30336,
+      "SslCert": "",
+      "SslCertPassword": ""
     }
   }
 }
