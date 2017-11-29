@@ -28,9 +28,6 @@ RUN apt-get update && apt-get install -y dotnet-sdk-2.0.0
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
 
-# Download neo-cli
-RUN wget -O /opt/neo-cli.zip https://github.com/neo-project/neo-cli/releases/download/v2.4.1/neo-cli-ubuntu.16.04-x64.zip
-
 # Extract and prepare four consensus nodes
 RUN unzip -d /opt/node1 /opt/neo-cli.zip
 RUN unzip -d /opt/node2 /opt/neo-cli.zip
