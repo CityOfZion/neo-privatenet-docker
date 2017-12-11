@@ -5,7 +5,7 @@ then
     then
         echo "no neo-cli.zip provided - release already downloaded" 
     else
-        echo "no neo-cli.zip provided - release already downloaded" 
+        echo "no neo-cli.zip provided - downloading now" 
         wget -O ./neo-release241.zip https://github.com/neo-project/neo-cli/releases/download/v2.4.1/neo-cli-ubuntu.16.04-x64.zip
     fi
     cp ./neo-release241.zip ./neo-cli.zip
