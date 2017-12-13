@@ -30,10 +30,6 @@ Start the private network, create a wallet and automatically claim the initial N
 
     ./docker_run_and_create_wallet.sh
 
-_or_, if you prefer `docker-compose`, you can start the nodes with:
-
-    docker-compose up -d
-
 You can now claim the initial NEO and GAS:
 
     ./create_wallet.sh

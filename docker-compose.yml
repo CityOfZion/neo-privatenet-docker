@@ -1,5 +1,12 @@
 version: '3'
 services:
+  neo-python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    volumes:
+      - .:/wallets
+      - ./configs/privnet-protocol.json:/opt/neo-python/protocol.privnet.json
   neo-privnet-node-one:
     build: .
     container_name: neo-privnet-node-one
@@ -10,7 +17,6 @@ services:
       - 30333:30333
     volumes:
       - ./wallets/wallet1.db3:/opt/node/neo-cli/wallet.db3
-      - ./scripts/start_consensus_node.sh:/opt/start_consensus_node.sh
   neo-privnet-node-two:
     build: .
     container_name: neo-privnet-node-two
@@ -21,7 +27,6 @@ services:
       - 30334:30333
     volumes:
       - ./wallets/wallet2.db3:/opt/node/neo-cli/wallet.db3
-      - ./scripts/start_consensus_node.sh:/opt/start_consensus_node.sh
   neo-privnet-node-three:
     build: .
     container_name: neo-privnet-node-three
@@ -32,7 +37,6 @@ services:
       - 30335:30333
     volumes:
       - ./wallets/wallet3.db3:/opt/node/neo-cli/wallet.db3
-      - ./scripts/start_consensus_node.sh:/opt/start_consensus_node.sh
   neo-privnet-node-four:
     build: .
     container_name: neo-privnet-node-four
@@ -43,4 +47,3 @@ services:
       - 30336:30333
     volumes:
       - ./wallets/wallet4.db3:/opt/node/neo-cli/wallet.db3
-      - ./scripts/start_consensus_node.sh:/opt/start_consensus_node.sh

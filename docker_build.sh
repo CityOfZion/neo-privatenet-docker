@@ -1,4 +1,5 @@
 #!/bin/bash
+<<<<<<< HEAD
 # To use a newer neo-cli version, just update this variable:
 NEO_CLI_VERSION="2.5.2"
 
@@ -24,3 +25,6 @@ else
 fi
 
 docker build -t neo-privnet .
+=======
+docker-compose build
+>>>>>>> Use docker-compose to stand things up

@@ -34,10 +34,8 @@ RUN unzip -d /opt/node /opt/neo-cli.zip
 ADD ./configs/config.json /opt/node/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node/neo-cli/protocol.json
 
-# Add scripts
-ADD ./scripts/run.sh /opt/
+# Upload scripts
 ADD ./scripts/start_consensus_node.sh /opt/
-ADD ./scripts/claim_neo_and_gas.py /opt/neo-python/
 
 # Inform Docker what ports to expose
 EXPOSE 20333

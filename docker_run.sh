@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# Start a Docker container which runs the four consensus nodes. If it is
-# already running, it will be destroyed first.
+# Starts four consensus nodes.
 #
+<<<<<<< HEAD
 CONTAINER_NAME="neo-privnet"
 CONTAINER=$(docker ps -aqf name=$CONTAINER_NAME)
 
@@ -15,3 +15,7 @@ fi
 
 echo "Starting container..."
 docker run -d --name $CONTAINER_NAME -p 20333-20336:20333-20336/tcp -p 30333-30336:30333-30336/tcp -h $CONTAINER_NAME $CONTAINER_NAME
+=======
+
+docker-compose up -d
+>>>>>>> Use docker-compose to stand things up

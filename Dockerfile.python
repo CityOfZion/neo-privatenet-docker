@@ -1,0 +1,31 @@
+# NEO private network - Dockerfile
+FROM ubuntu:16.04
+LABEL maintainer="hal0x2328"
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV NEO_PYTHON_REPO https://github.com/CityOfZion/neo-python/archive/master.tar.gz
+ENV NEO_PYTHON_CLAIM_SCRIPT /opt/neo-python/scripts/privnet-claim-neo-and-gas.py
+
+# Install system dependencies. always should be done in one line
+# https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
+RUN apt-get update && apt-get install -y \
+    apt-utils \
+    wget python \
+    ca-certificates apt-transport-https \
+    libleveldb-dev sqlite3 libsqlite3-dev \
+    python3.5-dev python3-pip libssl-dev
+
+# APT cleanup to reduce image size
+RUN rm -rf /var/lib/apt/lists/*
+
+# neo-python setup
+RUN wget -O /tmp/neo-python.tar.gz $NEO_PYTHON_REPO
+RUN mkdir -p /opt/neo-python
+RUN tar -xvf /tmp/neo-python.tar.gz -C /opt/neo-python --strip-components=1
+
+# neo-python install deps
+WORKDIR /opt/neo-python
+RUN pip3 install -r /opt/neo-python/requirements.txt
+RUN chmod u+x $NEO_PYTHON_CLAIM_SCRIPT
+
+ENTRYPOINT ["python3.5"]
