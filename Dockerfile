@@ -12,11 +12,11 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
 RUN apt-get update && apt-get install -y \
     apt-utils \
-    mininet netcat curl wget unzip less python screen \
+    mininet netcat curl wget unzip less \
     ca-certificates apt-transport-https \
     libleveldb-dev sqlite3 libsqlite3-dev \
     expect \
-    git-core python3.5-dev python3-pip libssl-dev
+    libssl-dev
 
 # Add dotnet apt repository
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
@@ -38,13 +38,7 @@ ADD ./configs/config.json /opt/node/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node/neo-cli/protocol.json
 
 # Upload scripts
-ADD ./scripts/run.sh /opt/
 ADD ./scripts/start_consensus_node.sh /opt/
-
-# neo-python setup
-RUN git clone https://github.com/CityOfZion/neo-python.git /opt/neo-python
-RUN cd /opt/neo-python && git checkout origin/master
-RUN pip3 install -r /opt/neo-python/requirements.txt
 
 # Inform Docker what ports to expose
 EXPOSE 20333

@@ -9,10 +9,10 @@
       "02a7bc55fe8684e0119768d104ba30795bdcc86619e864add26156723ed185cd62"
     ],
     "SeedList": [
-      "127.0.0.1:20333",
-      "127.0.0.1:20334",
-      "127.0.0.1:20335",
-      "127.0.0.1:20336"
+      "neo-privnet-node-one:20333",
+      "neo-privnet-node-two:20333",
+      "neo-privnet-node-three:20333",
+      "neo-privnet-node-four:20333"
     ],
     "SystemFee": {
       "EnrollmentTransaction": 1000,
