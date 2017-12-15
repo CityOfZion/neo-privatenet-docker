@@ -38,19 +38,19 @@ RUN unzip -d /opt/node4 /opt/neo-cli.zip
 
 ADD ./configs/config1.json /opt/node1/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node1/neo-cli/protocol.json
-ADD ./wallets/wallet1.db3 /opt/node1/neo-cli/
+ADD ./wallets/wallet1.json /opt/node1/neo-cli/
 
 ADD ./configs/config2.json /opt/node2/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node2/neo-cli/protocol.json
-ADD ./wallets/wallet2.db3 /opt/node2/neo-cli/
+ADD ./wallets/wallet2.json /opt/node2/neo-cli/
 
 ADD ./configs/config3.json /opt/node3/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node3/neo-cli/protocol.json
-ADD ./wallets/wallet3.db3 /opt/node3/neo-cli/
+ADD ./wallets/wallet3.json /opt/node3/neo-cli/
 
 ADD ./configs/config4.json /opt/node4/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node4/neo-cli/protocol.json
-ADD ./wallets/wallet4.db3 /opt/node4/neo-cli/
+ADD ./wallets/wallet4.json /opt/node4/neo-cli/
 
 # Upload scripts
 ADD ./scripts/run.sh /opt/
