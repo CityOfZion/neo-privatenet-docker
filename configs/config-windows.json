@@ -1,0 +1,24 @@
+﻿{
+  "ApplicationConfiguration": {
+    "Paths": {
+      "Chain": "Chain",
+      "Notifications": "Notifications"
+    },
+    "P2P": {
+      "Port": 20333,
+      "WsPort": 10333
+    },
+    "RPC": {
+      "Port": 30333,
+      "SslCert": "",
+      "SslCertPassword": ""
+    },
+	"DataDirectoryPath": "ChainTestNet",
+    "CertCachePath": "Certs",
+    "NodePort": 20333,
+    "WsPort": 20334,
+    "UriPrefix": [ "https://localhost:20332" ],
+    "SslCert": "",
+    "SslCertPassword": "",
+  }
+}
