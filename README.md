@@ -37,8 +37,8 @@ You can now claim the initial NEO and GAS:
 
 If you call ./create_wallet.sh or ./docker_run_and_create_wallet.sh, it will create 2 files in your current directory :
 
-- `neo-privnet.wallet` : a wallet you can use with neo-python 
-- `neo-privnet.wif` : a wif private key you can import into other clients (neo-gui for exemple).
+- `neo-privnet.wallet`: a wallet you can use with neo-python 
+- `neo-privnet.wif`: a wif private key you can import into other clients (neo-gui for example).
  
 Those files will get you access to the wallet containing all the NEOs of your private network.
 
