@@ -35,12 +35,12 @@ You can now claim the initial NEO and GAS:
 
 `./create_wallet` will display several internal error messages, which is expected as long as at the end you still get a success message.
 
-If you call `./create_wallet.sh` or `./docker_run_and_create_wallet.sh`, it will create 2 files in your current directory :
+If you call `./create_wallet.sh` or `./docker_run_and_create_wallet.sh`, it will create 2 files in your current directory:
 
 - `neo-privnet.wallet`: a wallet you can use with neo-python 
 - `neo-privnet.wif`: a wif private key you can import into other clients (neo-gui for example).
  
-Those files will get you access to the wallet containing all the NEOs of your private network.
+Those files will get you access to the wallet containing all the NEO and GAS for your private network.
 
 ---
 
@@ -77,11 +77,11 @@ If you don't copy the protocol.json from the docker configs directory of this re
 
 ##### For users who use docker machine (i.e Windows Home Edition users without Hyper-V)
 
- You'll need your docker machine IP. First, get the name of your machine :
+ You'll need your docker machine IP. First, get the name of your machine:
 
     docker-machine ls
 
-And get the ip with :
+And get the ip with:
 
     docker-machine ip "Nameofyourmachine"
 
@@ -89,7 +89,7 @@ And get the ip with :
 
 ## Copy wallets from docker image to neo-gui
 
-Note : You won't need this step if you used `./create_wallet.sh` or `./docker_run_and_create_wallet.sh` in the previous step (The multiparty signature and neo/gas extraction should already be done).
+Note: You won't need this step if you used `./create_wallet.sh` or `./docker_run_and_create_wallet.sh` in the previous step (The multiparty signature and neo/gas extraction should already be done).
 
 Once your docker image is running, use the following commands to copy each node's wallet to your neo-gui home directory in preparation for multiparty signature and neo/gas extraction.
 Note: all four must be copied.
