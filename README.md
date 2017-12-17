@@ -96,10 +96,10 @@ Note: all four must be copied.
 
 The following will copy each wallet from the docker image to the current working directory.
 
-    docker cp neo-privnet:/opt/node1/neo-cli/wallet1.db3 .
-    docker cp neo-privnet:/opt/node2/neo-cli/wallet2.db3 .
-    docker cp neo-privnet:/opt/node3/neo-cli/wallet3.db3 .
-    docker cp neo-privnet:/opt/node4/neo-cli/wallet4.db3 .
+    docker cp neo-privnet:/opt/node1/neo-cli/wallet1.json .
+    docker cp neo-privnet:/opt/node2/neo-cli/wallet2.json .
+    docker cp neo-privnet:/opt/node3/neo-cli/wallet3.json .
+    docker cp neo-privnet:/opt/node4/neo-cli/wallet4.json .
 
 ## Wallet Passwords
 
