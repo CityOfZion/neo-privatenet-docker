@@ -1,7 +1,6 @@
 #!/bin/bash
 # To use a newer neo-cli version, just update this variable:
 NEO_CLI_VERSION="2.5.2"
-# NEO_CLI_VERSION="2.4.1"
 
 # Definition of standard neo-cli filenames and URL based on the version
 NEO_CLI_ZIPFN="neo-release-${NEO_CLI_VERSION}.zip"
