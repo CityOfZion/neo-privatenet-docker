@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/CityOfZion/neo-privatenet-docker.svg?branch=master)](https://travis-ci.org/CityOfZion/neo-privatenet-docker)
+
 # neo-privatenet-docker
 
 Here we have provided a convenient way to setup a private Neo blockchain with an Ubuntu 16.04 docker image.
@@ -37,9 +39,9 @@ You can now claim the initial NEO and GAS:
 
 If you call `./create_wallet.sh` or `./docker_run_and_create_wallet.sh`, it will create 2 files in your current directory:
 
-- `neo-privnet.wallet`: a wallet you can use with neo-python 
+- `neo-privnet.wallet`: a wallet you can use with neo-python
 - `neo-privnet.wif`: a wif private key you can import into other clients (neo-gui for example).
- 
+
 Those files will get you access to the wallet containing all the NEO and GAS for your private network.
 
 ---
