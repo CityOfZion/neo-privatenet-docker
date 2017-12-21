@@ -56,6 +56,7 @@ ADD ./wallets/wallet4.json /opt/node4/neo-cli/
 # Add scripts
 ADD ./scripts/run.sh /opt/
 ADD ./scripts/start_consensus_node.sh /opt/
+ADD ./scripts/claim_neo_and_gas.py /opt/neo-python/
 
 # Inform Docker what ports to expose
 EXPOSE 20333
