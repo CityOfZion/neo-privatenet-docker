@@ -1,15 +1,18 @@
-[![Build Status](https://travis-ci.org/CityOfZion/neo-privatenet-docker.svg?branch=master)](https://travis-ci.org/CityOfZion/neo-privatenet-docker)
-
 # neo-privatenet-docker
 
-Here we have provided a convenient way to setup a private Neo blockchain with an Ubuntu 16.04 docker image.
-Please review Dockerfile for details of software.
+[![Build Status](https://travis-ci.org/CityOfZion/neo-privatenet-docker.svg?branch=master)](https://travis-ci.org/CityOfZion/neo-privatenet-docker)
+
+This is a convenient way to run a private Neo blockchain. The image is based on microsoft/dotnet:2.0-runtime,
+please review Dockerfile for details.
 
 This image is meant to skip the overhead of having to wait to get enough gas for smart contract testing on testnet and to bypass the steps of creating your own private chain.
 
-See the section below on extracting Neo and Gas as the private chain in this docker image starts at block height 0.
+See the section below on extracting Neo and Gas as the private chain in this Docker image starts at block height 0.
 
-You will also need to install and configure the neo-gui pc client on your favorite distro. This involves editing the protocol.json file to point the seeds at your docker IP addresses.
+You will also need to install and configure your neo client to use this private network, which involves editing the protocol.json file to point the seeds at your docker IP addresses.
+
+**Note:** There is also a turnkey Docker image with the initial 100m NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/metachris/neo-privnet-with-gas/
+
 
 ## Instructions
 
@@ -43,10 +46,6 @@ If you call `./create_wallet.sh` or `./docker_run_and_create_wallet.sh`, it will
 - `neo-privnet.wif`: a wif private key you can import into other clients (neo-gui for example).
 
 Those files will get you access to the wallet containing all the NEO and GAS for your private network.
-
----
-
-There is also a turnkey Docker image with the initial 100m NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/metachris/neo-privnet-with-gas/
 
 ## Install neo-gui or neo-gui-developer
 

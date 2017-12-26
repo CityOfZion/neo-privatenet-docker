@@ -12,14 +12,14 @@ then
 
     if [ -e "${NEO_CLI_ZIPFN}" ]
     then
-        echo "- release already downloaded"
+        echo "- release already downloaded: ${NEO_CLI_ZIPFN}"
     else
-        echo "- downloading now..."
+        echo "- downloading ${NEO_CLI_URL}..."
         wget -O $NEO_CLI_ZIPFN $NEO_CLI_URL
     fi
     cp $NEO_CLI_ZIPFN ./neo-cli.zip
 else
-    echo "Local neo-cli.zip provided"
+    echo "Using custom neo-cli.zip: $1"
     cp $1 ./neo-cli.zip
 fi
 
