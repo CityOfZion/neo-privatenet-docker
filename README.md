@@ -1,113 +1,109 @@
-# neo-privatenet-docker
 
-[![Build Status](https://travis-ci.org/CityOfZion/neo-privatenet-docker.svg?branch=master)](https://travis-ci.org/CityOfZion/neo-privatenet-docker)
+<p align="center">
+  <img 
+    src="http://res.cloudinary.com/vidsy/image/upload/v1503160820/CoZ_Icon_DARKBLUE_200x178px_oq0gxm.png" 
+    width="125px"
+  >
+</p>
 
-This is a convenient way to run a private Neo blockchain. The image is based on microsoft/dotnet:2.0-runtime,
-please review Dockerfile for details.
+<h1 align="center">neo-privatenet-docker</h1>
 
-This image is meant to skip the overhead of having to wait to get enough gas for smart contract testing on testnet and to bypass the steps of creating your own private chain.
+<p align="center">
+  Repo for running a local privatenet NEO cluster using docker.
+</p>
 
-See the section below on extracting Neo and Gas as the private chain in this Docker image starts at block height 0.
+<p align="center">
+  <a href="https://github.com/stevenjack/neo-privatenet-docker/releases">
+    <img src="https://img.shields.io/github/tag/stevenjack/neo-privatenet-docker.svg?style=flat">
+  </a>
+  <a href="https://circleci.com/gh/stevenjack/neo-privatenet-docker/tree/master">
+    <img src="https://circleci.com/gh/stevenjack/neo-privatenet-docker/tree/master.svg?style=shield">
+  </a>
+</p>
 
-You will also need to install and configure your neo client to use this private network, which involves editing the protocol.json file to point the seeds at your docker IP addresses.
+## What?
 
-**Note:** There is also a turnkey Docker image with the initial 100m NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/metachris/neo-privnet-with-gas/
+- Set of scripts for Linux, OSX and Windows to simply run a local NEO cluster using docker.
+- Created to skip the overhead of having to wait to get enough gas for smart contract testing on testnet and to bypass the steps of creating your own private chain.
+- Run using docker compose.
+- Creates a 4 node cluster that can be interacted with from clients such as the neo-gui.
 
+## Quick Start
 
-## Instructions
+### Linux / OSX
 
-Clone the repository and build the Docker image:
+Run the following to set the cluster up:
 
-    git clone https://github.com/CityOfZion/neo-privatenet-docker.git
-    cd neo-privatenet-docker
-    ./docker_build.sh
+```
+./scripts/linux/run.sh
+```
 
-Just start the private network:
+### Windows
 
-    ./docker_run.sh
+```
+./scripts/windows/run.bat
+```
 
-Start the private network, create a wallet and automatically claim the initial NEO and 48 GAS (takes about 5 minutes):
+The scripts will output the progress of the node setup and once running will automatically create a wallet and claim the gas after one minute. 
 
-    ./docker_run_and_create_wallet.sh
+### NEO GUI client configuration
 
-You can now claim the initial NEO and GAS:
+You will also need to install and configure the neo-gui pc client on your favorite distro, for example one of the following:
 
-    ./create_wallet.sh
+* [neo-gui](https://github.com/neo-project/neo-gui)
+* [neo-gui-developer](https://github.com/CityOfZion/neo-gui-developer)
 
-`./create_wallet` will display several internal error messages, which is expected as long as at the end you still get a success message.
+Then run:
 
-If you call `./create_wallet.sh` or `./docker_run_and_create_wallet.sh`, it will create 2 files in your current directory:
+#### OSX/Linux
 
-- `neo-privnet.wallet`: a wallet you can use with neo-python
-- `neo-privnet.wif`: a wif private key you can import into other clients (neo-gui for example).
+```bash
+scripts/linux/generate_protocol_json.sh
+```
 
-Those files will get you access to the wallet containing all the NEO and GAS for your private network.
+#### Windows
 
-## Install neo-gui or neo-gui-developer
+```bat
+scripts/windows/generate_protocol_json.bat
+```
 
-Install one of the following:
+and you'll find `protocol.json` in root of this repo that you can then use as the config for your chosen version of `neo-gui` that you've installed.
 
-https://github.com/neo-project/neo-gui
+#### Manunal protocol.json confnig
 
-https://github.com/CityOfZion/neo-gui-developer
-
-Edit the protocol.json in your respective neo-gui installation to point to the IP of the system running your docker.
-Please note the ports listed match the private chain ports in the current docker build.
-
-If you copy the protocol.json file from the configs directory of this repo and replace your neo-gui protocol.json you will only need to find and edit the section that looks like the following:
-
-"SeedList": [
-    "127.0.0.1:20333",
-    "127.0.0.1:20334",
-    "127.0.0.1:20335",
-    "127.0.0.1:20336"
-],
-
-Change each occurrence of 127.0.0.1 to the IP of the system or vm running your docker image.
-
-If you don't copy the protocol.json from the docker configs directory of this repo, in addition to the "SeedList" modifications mentioned above, you will also need to edit the following:
+If you don't copy the protocol.json from the docker configs directory of this repo, in addition to the "SeedList" modifications mentioned above, youd will also need to edit the following:
 
 1. Change value "Magic" to 56753
 2. Copy the public keys of each of your node wallets into the "StandbyValidators" section
 
----
+### Wallets
 
-##### For users who use docker machine (i.e Windows Home Edition users without Hyper-V)
+The wallets are mounted into the NEO CLI containers so are available in `wallets/` in preparation for multiparty signature and neo/gas extraction.
 
- You'll need your docker machine IP. First, get the name of your machine:
+#### Passwords
 
-    docker-machine ls
+  * `node1`: `one`
+  * `node2`: `two`
+  * `node3`: `three`
+  * `node4`: `four`
 
-And get the ip with:
+### Extracting Neo and Gas
 
-    docker-machine ip "Nameofyourmachine"
+Check out the [docs](http://docs.neo.org/en-us/node/private-chain.html) for instructions on how to claim Neo and Gas for testing.
 
-(By default, the machine name is "default"). Use this ip to replace each occurence of 127.0.0.1 in the SeedList array.
+### Prebuilt image
 
-## Copy wallets from docker image to neo-gui
+There is also a turnkey Docker image with the initial 100m NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: 
 
-Note: You won't need this step if you used `./create_wallet.sh` or `./docker_run_and_create_wallet.sh` in the previous step (The multiparty signature and neo/gas extraction should already be done).
+* [neo-privnet-with-gas](https://hub.docker.com/r/metachris/neo-privnet-with-gas/)
 
-Once your docker image is running, use the following commands to copy each node's wallet to your neo-gui home directory in preparation for multiparty signature and neo/gas extraction.
-Note: all four must be copied.
 
-The following will copy each wallet from the docker image to the current working directory.
+## Help
 
-    docker cp neo-privnet:/opt/node1/neo-cli/wallet1.json .
-    docker cp neo-privnet:/opt/node2/neo-cli/wallet2.json .
-    docker cp neo-privnet:/opt/node3/neo-cli/wallet3.json .
-    docker cp neo-privnet:/opt/node4/neo-cli/wallet4.json .
+- Open a new [issue](https://github.com/stevenjack/neo-privatenet-docker/issues/new) if you encountered a problem.
+- Submitting PRs to the project is always welcome! 🎉
+- Check the [Changelog](https://github.com/stevenjack/neo-privatenet-docker/blob/master/CHANGELOG.md) for recent changes.
 
-## Wallet Passwords
+## License
 
-node1: one
-
-node2: two
-
-node3: three
-
-node4: four
-
-## Extracting Neo and Gas
-Check out the docs at http://docs.neo.org/en-us/node/private-chain.html for instructions on how to claim Neo and Gas
-for testing.
+- Open-source [MIT](https://github.com/stevenjack/neo-privatenet-docker/blob/master/LICENSE).
