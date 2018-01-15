@@ -1,6 +1,8 @@
 #!/bin/bash
+set -e
+
 # To use a newer neo-cli version, just update this variable:
-NEO_CLI_VERSION="2.5.2"
+NEO_CLI_VERSION="2.6.0"
 
 # Definition of standard neo-cli filenames and URL based on the version
 NEO_CLI_ZIPFN="neo-release-${NEO_CLI_VERSION}.zip"
@@ -15,7 +17,7 @@ then
         echo "- release already downloaded: ${NEO_CLI_ZIPFN}"
     else
         echo "- downloading ${NEO_CLI_URL}..."
-        wget -O $NEO_CLI_ZIPFN $NEO_CLI_URL
+        wget --no-check-certificate -O $NEO_CLI_ZIPFN $NEO_CLI_URL || (rm -f $NEO_CLI_ZIPFN && exit 1)
     fi
     cp $NEO_CLI_ZIPFN ./neo-cli.zip
 else
