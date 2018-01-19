@@ -2,12 +2,13 @@ FROM microsoft/dotnet:2.0-runtime
 
 ARG VERSION
 ARG NEO_CLI_VERSION=2.5.2
-ENV DEBIAN_FRONTEND noninteractive
-ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 LABEL maintainer="City of Zion"
 LABEL authors="hal0x2328, phetter, metachris, ashant, stevenjack"
-LABEL version=$VERSION
+LABEL version=${VERSION}
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 # Install system dependencies. always should be done in one line
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
@@ -24,7 +25,6 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN curl -L -s -o /opt/neo-cli.zip https://github.com/neo-project/neo-cli/releases/download/v${NEO_CLI_VERSION}/neo-cli-ubuntu.16.04-x64.zip
 
 # Add the neo-cli package
-ADD ./neo-cli.zip /opt/neo-cli.zip
 RUN unzip -d /opt/node /opt/neo-cli.zip
 
 ADD wallets /wallets
