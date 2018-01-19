@@ -36,10 +36,10 @@ from Crypto import Random
 
 from neo.Implementations.Wallets.peewee.UserWallet import UserWallet
 from neo.Implementations.Blockchains.LevelDB.LevelDBBlockchain import LevelDBBlockchain
-from neo.Wallets.KeyPair import KeyPair
+from neocore.KeyPair import KeyPair
 from neo.Prompt.Commands.LoadSmartContract import ImportMultiSigContractAddr
 from neo.Core.Blockchain import Blockchain
-from neo.Fixed8 import Fixed8
+from neocore.Fixed8 import Fixed8
 from neo.Prompt.Commands.Send import construct_and_send
 from neo.Prompt.Commands.Wallet import ClaimGas
 from neo.Core.TX.Transaction import TransactionOutput, ContractTransaction
