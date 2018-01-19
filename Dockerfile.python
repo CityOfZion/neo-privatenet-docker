@@ -4,7 +4,6 @@ LABEL maintainer="hal0x2328"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV NEO_PYTHON_REPO https://github.com/CityOfZion/neo-python/archive/master.tar.gz
-ENV NEO_PYTHON_CLAIM_SCRIPT /opt/neo-python/scripts/privnet-claim-neo-and-gas.py
 
 # Install system dependencies. always should be done in one line
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
@@ -26,6 +25,9 @@ RUN tar -xvf /tmp/neo-python.tar.gz -C /opt/neo-python --strip-components=1
 # neo-python install deps
 WORKDIR /opt/neo-python
 RUN pip3 install -r /opt/neo-python/requirements.txt
-RUN chmod u+x $NEO_PYTHON_CLAIM_SCRIPT
+
+ADD scripts/claim_neo_and_gas.sh /opt/neo-python/claim_neo_and_gas.py
+RUN chmod u+x /opt/neo-python/claim_neo_and_gas.py
 
 ENTRYPOINT ["python3.5"]
+CMD ["/opt/neo-python/claim_neo_and_gas.py", "-o", "/tmp/wallet", "-p", "coz", "-w", "/tmp/wif"]
