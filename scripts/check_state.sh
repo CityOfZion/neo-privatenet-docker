@@ -1,15 +1,17 @@
-#!/usr/bin/expect -f
-set dnpath [lindex $argv 0]
-set wallet [lindex $argv 1]
-set password [lindex $argv 2]
-set timeout -1
-cd $dnpath
-spawn dotnet neo-cli.dll --rpc
-expect "neo>"
-send "open wallet $wallet\n"
-expect "password:"
-send "$password\n"
-expect "neo>"
-send "show state\n"
-send "show pool\n"
-interact
+#!/bin/bash
+
+NODE_DIR=$1
+NODE_COUNT=0
+CONSENSUS_COUNT=4
+
+echo "=> Checking how many nodes are connected..."
+
+while [ $NODE_COUNT -lt $CONSENSUS_COUNT ]
+do
+  NODES=$(expect -c "cd ${NODE_DIR}; spawn dotnet neo-cli.dll; expect \"neo>\";sleep 0.2;send \"show state\n\";send \"exit\n\";interact" | tr -d '\0')
+  NODE_COUNT=$(echo `expr "$NODES" : '.* Nodes: \([0-9]\)'`)
+  echo "=> $NODE_COUNT/$CONSENSUS_COUNT connected"
+  sleep 0.5
+done
+
+echo "=> Cluster has attained consensus!"

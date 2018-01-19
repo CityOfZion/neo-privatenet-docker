@@ -2,8 +2,9 @@
 
 FROM microsoft/dotnet:2.0-runtime
 LABEL maintainer="City of Zion"
-LABEL authors="hal0x2328, phetter, metachris, ashant"
+LABEL authors="hal0x2328, phetter, metachris, ashant, stevenjack"
 
+ARG NEO_CLI_VERSION=2.5.2
 ENV DEBIAN_FRONTEND noninteractive
 
 # Disable dotnet usage information collection
@@ -13,19 +14,15 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
 RUN apt-get update && apt-get install -y \
     unzip \
-    screen \
     expect \
     libleveldb-dev \
-    git-core \
-    python3.5-dev python3-pip libssl-dev
+    libssl-dev
 
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
 
-# neo-python setup
-RUN git clone https://github.com/CityOfZion/neo-python.git /opt/neo-python
-RUN cd /opt/neo-python && git checkout origin/master
-RUN pip3 install -r /opt/neo-python/requirements.txt
+# Download neo-cli
+RUN curl -L -s -o /opt/neo-cli.zip https://github.com/neo-project/neo-cli/releases/download/v${NEO_CLI_VERSION}/neo-cli-ubuntu.16.04-x64.zip
 
 # Add the neo-cli package
 ADD ./neo-cli.zip /opt/neo-cli.zip
