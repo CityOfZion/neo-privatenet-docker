@@ -1,6 +1,6 @@
 BRANCH ?= "master"
 REPONAME ?= "$(shell basename `git rev-parse --show-toplevel`)"
-ORG ?= "stevenjack"
+ORG ?= "smaj"
 VERSION ?= $(shell cat ./VERSION)
 
 build-image:
