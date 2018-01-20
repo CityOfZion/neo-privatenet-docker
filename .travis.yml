@@ -8,11 +8,12 @@ python:
 services:
   - docker
 
-
 before_install:
   - bash ./docker_build.sh
   - docker run -d --name neo-privnet -p 20333-20336:20333-20336/tcp -p 30333-30336:30333-30336/tcp -h neo-privnet neo-privnet
   - docker ps -a
+  - sleep 5
+  - "curl -X POST http://localhost:30333 -d '{ \"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"getblockcount\", \"params\": [] }'"
 
 script:
   - ./create_wallet.sh

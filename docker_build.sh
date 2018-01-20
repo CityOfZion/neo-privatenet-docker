@@ -1,17 +1,30 @@
 #!/bin/bash
-if [ -z "$1" ]; 
-then    
-    if [ -e neo-release241.zip ]
+<<<<<<< HEAD
+# To use a newer neo-cli version, just update this variable:
+NEO_CLI_VERSION="2.5.2"
+
+# Definition of standard neo-cli filenames and URL based on the version
+NEO_CLI_ZIPFN="neo-release-${NEO_CLI_VERSION}.zip"
+NEO_CLI_URL="https://github.com/neo-project/neo-cli/releases/download/v${NEO_CLI_VERSION}/neo-cli-ubuntu.16.04-x64.zip"
+
+if [ -z "$1" ];
+then
+    echo "Using default neo-cli v${NEO_CLI_VERSION}"
+
+    if [ -e "${NEO_CLI_ZIPFN}" ]
     then
-        echo "no neo-cli.zip provided - release already downloaded" 
+        echo "- release already downloaded: ${NEO_CLI_ZIPFN}"
     else
-        echo "no neo-cli.zip provided - downloading now" 
-        wget -O ./neo-release241.zip https://github.com/neo-project/neo-cli/releases/download/v2.4.1/neo-cli-ubuntu.16.04-x64.zip
+        echo "- downloading ${NEO_CLI_URL}..."
+        wget -O $NEO_CLI_ZIPFN $NEO_CLI_URL
     fi
-    cp ./neo-release241.zip ./neo-cli.zip
+    cp $NEO_CLI_ZIPFN ./neo-cli.zip
 else
-    echo "local neo-cli.zip provided - copying" 
+    echo "Using custom neo-cli.zip: $1"
     cp $1 ./neo-cli.zip
 fi
 
 docker build -t neo-privnet .
+=======
+docker-compose build
+>>>>>>> Use docker-compose to stand things up

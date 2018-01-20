@@ -12,5 +12,5 @@ send "$password\n"
 expect "neo>"
 send "start consensus\n"
 expect "OnStart"
-#expect "LIVEFOREVER"
+expect "LIVEFOREVER"
 interact

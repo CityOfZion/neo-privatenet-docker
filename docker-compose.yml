@@ -1,14 +1,61 @@
 version: '3'
 services:
-  neo-privnet:
-    build: .
-    container_name: neo-privnet
-    ports:
-      - 10333-10336:10333-10336
-      - 20333-20336:20333-20336
-      - 30333-30336:30333-30336
+  neo-python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
     volumes:
-      - /opt/node1/neo-cli/Chain
-      - /opt/node2/neo-cli/Chain
-      - /opt/node3/neo-cli/Chain
-      - /opt/node4/neo-cli/Chain
+      - .:/wallets
+      - ./configs/privnet-protocol.json:/opt/neo-python/protocol.privnet.json
+      - ./scripts/claim_neo_and_gas.sh:/opt/neo-python/claim_neo_and_gas.sh
+  neo-privnet-node-one:
+    build: .
+    container_name: neo-privnet-node-one
+    command: /opt/node/neo-cli/ wallet.json one
+    ports:
+      - 10333:10333
+      - 20333:20333
+      - 30333:30333
+    volumes:
+      - ./wallets/wallet1.json:/opt/node/neo-cli/wallet.json
+  neo-privnet-node-two:
+    build: .
+    container_name: neo-privnet-node-two
+    command: /opt/node/neo-cli/ wallet.json two
+    ports:
+      - 10334:10333
+      - 20334:20333
+      - 30334:30333
+    volumes:
+      - ./wallets/wallet2.json:/opt/node/neo-cli/wallet.json
+  neo-privnet-node-three:
+    build: .
+    container_name: neo-privnet-node-three
+    command: /opt/node/neo-cli/ wallet.json three
+    ports:
+      - 10335:10333
+      - 20335:20333
+      - 30335:30333
+    volumes:
+      - ./wallets/wallet3.json:/opt/node/neo-cli/wallet.json
+  neo-privnet-node-four:
+    build: .
+    container_name: neo-privnet-node-four
+    command: /opt/node/neo-cli/ wallet.json four
+    ports:
+      - 10336:10333
+      - 20336:20333
+      - 30336:30333
+    volumes:
+      - ./wallets/wallet4.json:/opt/node/neo-cli/wallet.json
+  neo-privnet-node-check:
+    build: .
+    container_name: neo-privnet-node-check
+    command: /opt/node/neo-cli/
+    entrypoint: /check_state.sh
+    ports:
+      - 10337:10333
+      - 20337:20333
+      - 30337:30333
+    volumes:
+      - ./scripts/check_state.sh:/check_state.sh
