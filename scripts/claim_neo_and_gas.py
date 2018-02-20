@@ -145,7 +145,7 @@ class PrivnetClaimall(object):
 
             if relayed:
                 print("Relayed Tx: %s " % tx.Hash.ToString())
-                self.wait_for_tx(tx)
+                self.wait_for_tx(tx.Hash)
                 return('success')
 
             else:
@@ -160,11 +160,12 @@ class PrivnetClaimall(object):
         foundtx = False
         sec_passed = 0
         while not foundtx and sec_passed < max_seconds:
-            _tx, height = Blockchain.Default().GetTransaction(tx.Hash.ToString())
+            _tx, height = Blockchain.Default().GetTransaction(tx)
             if height > -1:
                 foundtx = True
+                print("Transaction found with success")
                 continue
-            print("Waiting for tx {} to show up on blockchain...".format(tx.Hash.ToString()))
+            print("Waiting for tx {} to show up on blockchain...".format(tx))
             time.sleep(3)
             sec_passed += 3
         if foundtx:
@@ -213,11 +214,11 @@ class PrivnetClaimall(object):
             return
 
         # Wait until transaction is on blockchain
-        self.wait_for_tx(tx)
+        self.wait_for_tx(tx.Hash)
 
         print("Claiming the GAS...")
         claim_tx, relayed = ClaimGas(self.wallet, require_password=False)
-        self.wait_for_tx(claim_tx)
+        self.wait_for_tx(claim_tx.Hash)
 
         # Finally, need to rebuild the wallet
         self.wallet.Rebuild()
