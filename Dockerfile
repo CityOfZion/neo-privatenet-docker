@@ -2,7 +2,7 @@
 
 FROM microsoft/dotnet:2.0-runtime
 LABEL maintainer="City of Zion"
-LABEL authors="hal0x2328, phetter, metachris, ashant"
+LABEL authors="metachris, ashant, hal0x2328, phetter"
 
 ENV DEBIAN_FRONTEND noninteractive
 
