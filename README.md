@@ -22,7 +22,13 @@ Clone the repository and build the Docker image:
     cd neo-privatenet-docker
     ./docker_build.sh
 
-Just start the private network:
+`docker_build.sh` has a few possible arguments:
+
+* Disable Docker image caching with `docker_build.sh --no-cache`
+* Use a custom neo-cli zip file `docker_build.sh --neo-cli <zip-fn>`
+* Show the help with `docker_build.sh -h`
+
+After the image is built, you can start the private network like this:
 
     ./docker_run.sh
 
