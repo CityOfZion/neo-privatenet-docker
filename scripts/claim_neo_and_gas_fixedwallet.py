@@ -1,29 +1,27 @@
 #!/usr/bin/env python3
 """
-Warning: This script does not currently work. After claiming the initial NEO, this script is unable
-to send the NEO to the same wallet/address (used to work early February 2018). Possibly
-due to some neo-python changes. Now added `claim_neo_and_gas_fixedwallet.py` which uses
-a fixed wallet/address.
-
----
-
 With this script you can transfer all NEO from the default contract on a private network
 such as the one created by the neo-privatenet-docker image, without having to
 use the neo-gui client (or Windows at all). It also waits a little bit to generate
 GAS and claims it.
 
+It does the following:
+
+* Create a multi-sig spend transaction from the initial node wallets to a custom wallet address
+* Claim an initial GAS
+
 The output of the script is two things:
 
-* A wallet with 100,000,000 NEO and 48 GAS (after 1 minute) which you can use with prompt.py
+* A wallet with 100,000,000 NEO and 48 GAS (after 1 minute) which you can use with neo-python
 * A WIF private key you can use with any client.
 
 Run it like this:
 
-    python3 scripts/claim_neo_and_gas.py
+    python3 scripts/claim_neo_and_gas_fixedwallet.py
 
 There are several parameters you can configure with cli args. Take a look at the help:
 
-    python3 scripts/claim_neo_and_gas.py -h
+    python3 scripts/claim_neo_and_gas_fixedwallet.py -h
 
 This script takes several minutes to complete. Be patient!
 """
@@ -149,7 +147,11 @@ class PrivnetClaimall(object):
 
             if relayed:
                 print("Relayed Tx: %s " % tx.Hash.ToString())
-                self.wait_for_tx(tx)
+                foundtx = self.wait_for_tx(tx)
+                if foundtx:
+                    print("Transaction found, all is good!")
+                else:
+                    print("Transaction NOT found!")
                 return('success')
 
             else:
@@ -164,7 +166,7 @@ class PrivnetClaimall(object):
         foundtx = False
         sec_passed = 0
         while not foundtx and sec_passed < max_seconds:
-            _tx, height = Blockchain.Default().GetTransaction(tx.Hash.ToString())
+            _tx, height = Blockchain.Default().GetTransaction(tx.Hash)
             if height > -1:
                 foundtx = True
                 continue
@@ -186,26 +188,19 @@ class PrivnetClaimall(object):
             print("Waiting for wallet to sync...")
             time.sleep(1)
 
-        print("Creating Wallet...")
-        self.wallet = UserWallet.Create(path=self.wallet_fn, password=self.wallet_pwd)
-        self.wallet.ProcessBlocks()
-
-        # Extract infos from wallet
-        contract = self.wallet.GetDefaultContract()
-        key = self.wallet.GetKey(contract.PublicKeyHash)
-        address = key.GetAddress()
-        wif = key.Export()
-        print("- Address:", address)
-        print("- WIF key:", wif)
-        self.wallet = None
-
         # Claim initial NEO
+        address = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y"
         self.claim_initial_neo(address)
 
         # Open wallet again
-        self.wallet = UserWallet.Open(self.wallet_fn, self.wallet_pwd)
+        print("Opening wallet %s" % self.wallet_fn)
+        self.wallet = UserWallet.Open(self.wallet_fn, "coz")
+        self.wallet.ProcessBlocks()
         self._walletdb_loop = task.LoopingCall(self.wallet.ProcessBlocks)
         self._walletdb_loop.start(1)
+        # self.wallet.Rebuild()
+        # print("\nOpened wallet. Rebuilding...")
+        # time.sleep(10)
 
         print("\nWait %s min before claiming GAS." % self.min_wait)
         time.sleep(60 * self.min_wait)
@@ -227,13 +222,12 @@ class PrivnetClaimall(object):
         self.wallet.Rebuild()
 
         print("\nAll done!")
-        print("- WIF key: %s" % wif)
         print("- Wallet file: %s" % self.wallet_fn)
         print("- Wallet pwd: %s" % self.wallet_pwd)
 
         if self.wif_fn:
             with open(self.wif_fn, "w") as f:
-                f.write(wif)
+                f.write("KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr")
 
         self.quit()
 
@@ -282,15 +276,11 @@ class PrivnetClaimall(object):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-o", "--output", action="store", help="Filename of wallet that will be created (default: %s)" % WALLET_PATH, default=WALLET_PATH)
-    parser.add_argument("-p", "--password", action="store", help="Wallet password (default: %s)" % WALLET_PWD, default=WALLET_PWD)
+    # parser.add_argument("-o", "--output", action="store", help="Filename of wallet that will be created (default: %s)" % WALLET_PATH, default=WALLET_PATH)
+    # parser.add_argument("-p", "--password", action="store", help="Wallet password (default: %s)" % WALLET_PWD, default=WALLET_PWD)
     parser.add_argument("-t", "--time", action="store", help="Minutes to wait for the NEO to generate GAS (default: %s)" % MINUTES_TO_WAIT_UNTIL_GAS_CLAIM, default=MINUTES_TO_WAIT_UNTIL_GAS_CLAIM)
-    parser.add_argument("-w", "--save-privnet-wif", action="store", help="Filename to store created privnet wif key")
+    # parser.add_argument("-w", "--save-privnet-wif", action="store", help="Filename to store created privnet wif key")
     args = parser.parse_args()
-
-    if os.path.isfile(args.output):
-        print("Error: Wallet file %s already exists" % args.output)
-        exit(1)
 
     settings.setup_privnet()
     print("Blockchain DB path:", settings.LEVELDB_PATH)
@@ -303,6 +293,6 @@ if __name__ == "__main__":
     reactor.suggestThreadPoolSize(15)
     NodeLeader.Instance().Start()
 
-    pc = PrivnetClaimall(args.output, args.password, args.time, args.save_privnet_wif)
+    pc = PrivnetClaimall("/tmp/wallet", "coz", args.time, "/tmp/wif")
     reactor.callInThread(pc.run)
     reactor.run()
