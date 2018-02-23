@@ -11,7 +11,7 @@ See the section below on extracting Neo and Gas as the private chain in this Doc
 
 You will also need to install and configure your neo client to use this private network, which involves editing the protocol.json file to point the seeds at your docker IP addresses.
 
-**Note:** There is also a turnkey Docker image with the initial 100m NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/metachris/neo-privnet-with-gas/
+**Note:** There is also a turnkey Docker image with the initial 100M NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/cityofzion/neo-privatenet
 
 
 ## Instructions
