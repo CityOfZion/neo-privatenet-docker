@@ -24,7 +24,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 # neo-python setup
 RUN git clone https://github.com/CityOfZion/neo-python.git /opt/neo-python
-RUN cd /opt/neo-python && git checkout origin/master
+RUN cd /opt/neo-python && git checkout origin/development
 RUN pip3 install -r /opt/neo-python/requirements.txt
 
 # Add the neo-cli package
@@ -56,7 +56,8 @@ ADD ./wallets/wallet4.json /opt/node4/neo-cli/
 # Add scripts
 ADD ./scripts/run.sh /opt/
 ADD ./scripts/start_consensus_node.sh /opt/
-ADD ./scripts/claim_neo_and_gas.py /opt/neo-python/
+ADD ./scripts/claim_neo_and_gas_fixedwallet.py /opt/neo-python/
+ADD ./wallets/neo-privnet.python-wallet /tmp/wallet
 
 # Inform Docker what ports to expose
 EXPOSE 20333
