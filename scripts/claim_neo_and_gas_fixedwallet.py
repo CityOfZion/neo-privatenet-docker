@@ -36,6 +36,7 @@ import argparse
 from tempfile import NamedTemporaryFile
 from Crypto import Random
 
+from neo.Wallets.utils import to_aes_key
 from neo.Implementations.Wallets.peewee.UserWallet import UserWallet
 from neo.Implementations.Blockchains.LevelDB.LevelDBBlockchain import LevelDBBlockchain
 from neocore.KeyPair import KeyPair
@@ -194,7 +195,7 @@ class PrivnetClaimall(object):
 
         # Open wallet again
         print("Opening wallet %s" % self.wallet_fn)
-        self.wallet = UserWallet.Open(self.wallet_fn, "coz")
+        self.wallet = UserWallet.Open(self.wallet_fn, to_aes_key("coz"))
         self.wallet.ProcessBlocks()
         self._walletdb_loop = task.LoopingCall(self.wallet.ProcessBlocks)
         self._walletdb_loop.start(1)
@@ -242,7 +243,7 @@ class PrivnetClaimall(object):
             walletpath = "wallet{}.db3".format(i + 1)
             if os.path.exists(walletpath):
                 os.remove(walletpath)
-            wallet = UserWallet.Create(path=walletpath, password=self.wallet_pwd)
+            wallet = UserWallet.Create(path=walletpath, password=to_aes_key(self.wallet_pwd))
             wallets.append(wallet)
 
             print("Importing node private key to to {}".format(walletpath))
