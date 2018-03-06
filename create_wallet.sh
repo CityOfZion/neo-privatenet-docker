@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Starting script to claim NEO and GAS..."
-CLAIM_CMD="python3.5 /opt/neo-python/claim_neo_and_gas_fixedwallet.py"
+CLAIM_CMD="python3.6 /neo-python/claim_neo_and_gas_fixedwallet.py"
 DOCKER_CMD="docker exec -it neo-privnet ${CLAIM_CMD}"
 echo $DOCKER_CMD
 echo

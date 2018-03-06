@@ -1,12 +1,13 @@
 # NEO private network - Dockerfile
+FROM ubuntu:17.10
 
-FROM microsoft/dotnet:2.0-runtime
 LABEL maintainer="City of Zion"
 LABEL authors="metachris, ashant, hal0x2328, phetter"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # Disable dotnet usage information collection
+# https://docs.microsoft.com/en-us/dotnet/core/tools/telemetry#behavior
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 # Install system dependencies. always should be done in one line
@@ -17,15 +18,26 @@ RUN apt-get update && apt-get install -y \
     expect \
     libleveldb-dev \
     git-core \
-    python3.5-dev python3-pip libssl-dev
+    wget \
+    curl \
+    git-core \
+    python3.6 \
+    python3.6-dev \
+    python3.6-venv \
+    python3-pip \
+    libleveldb-dev \
+    libssl-dev \
+    vim \
+    man
+
+# Setup microsoft repositories
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
 
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
-
-# neo-python setup
-RUN git clone https://github.com/CityOfZion/neo-python.git /opt/neo-python
-RUN cd /opt/neo-python && git checkout origin/development
-RUN pip3 install -r /opt/neo-python/requirements.txt
 
 # Add the neo-cli package
 ADD ./neo-cli.zip /opt/neo-cli.zip
@@ -53,11 +65,26 @@ ADD ./configs/config4.json /opt/node4/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node4/neo-cli/protocol.json
 ADD ./wallets/wallet4.json /opt/node4/neo-cli/
 
+# neo-python setup: clonse and install dependencies
+RUN git clone https://github.com/CityOfZion/neo-python.git /neo-python
+WORKDIR /neo-python
+RUN pip3 install -r requirements.txt
+
+# Download the privnet wallet, to have it handy for easy experimenting
+RUN wget https://s3.amazonaws.com/neo-experiments/neo-privnet.wallet
+
 # Add scripts
 ADD ./scripts/run.sh /opt/
 ADD ./scripts/start_consensus_node.sh /opt/
-ADD ./scripts/claim_neo_and_gas_fixedwallet.py /opt/neo-python/
+ADD ./scripts/claim_neo_and_gas_fixedwallet.py /neo-python/
 ADD ./wallets/neo-privnet.python-wallet /tmp/wallet
+
+# Some .bashrc helpers: 'neopy', and a welcome message for bash users
+RUN echo "alias neopy=\"cd /neo-python && /usr/bin/python3.6 prompt.py -p\"" >> /root/.bashrc
+RUN echo "printf \"\n* Consensus nodes are running in screen sessions, check 'screen -ls'\"" >> /root/.bashrc
+RUN echo "printf \"\n* neo-python is installed in /neo-python, with a neo-privnet.wallet file in place\"" >> /root/.bashrc
+RUN echo "printf \"\n* You can use the alias 'neopy' in the shell to start neo-python's prompt.py with privnet settings\"" >> /root/.bashrc
+RUN echo "printf \"\n* Please report issues to https://github.com/CityOfZion/neo-privatenet-docker\n\n\"" >> /root/.bashrc
 
 # Inform Docker what ports to expose
 EXPOSE 20333
