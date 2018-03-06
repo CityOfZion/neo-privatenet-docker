@@ -14,7 +14,16 @@ You will also need to install and configure your neo client to use this private 
 **Note:** There is also a turnkey Docker image with the initial 100M NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/cityofzion/neo-privatenet
 
 
-## Instructions
+## Instructions to use the private network image
+
+Use these commands to pull the image from Docker hub and run it:
+
+    $ docker pull cityofzion/neo-privatenet
+    $ docker run --rm -d --name neo-privatenet -p 20333-20336:20333-20336/tcp -p 30333-30336:30333-30336/tcp cityofzion/neo-privatenet
+
+Take a look at the documentation at Docker Hub for more information about how to use the wallet and the supplied WIF key: https://hub.docker.com/r/cityofzion/neo-privatenet
+
+## Instructions to build the image yourself
 
 Clone the repository and build the Docker image:
 
