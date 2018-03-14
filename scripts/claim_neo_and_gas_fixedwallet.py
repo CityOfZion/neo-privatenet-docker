@@ -186,7 +186,7 @@ class PrivnetClaimall(object):
         Blockchain.Default().PersistBlocks()
 
         while Blockchain.Default().Height < 2:
-            print("Waiting for wallet to sync...")
+            print("Waiting for chain to sync...")
             time.sleep(1)
 
         # Claim initial NEO

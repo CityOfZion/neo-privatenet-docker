@@ -68,15 +68,14 @@ ADD ./wallets/wallet4.json /opt/node4/neo-cli/
 # neo-python setup: clonse and install dependencies
 RUN git clone https://github.com/CityOfZion/neo-python.git /neo-python
 WORKDIR /neo-python
+# RUN git checkout development
 RUN pip3 install -r requirements.txt
-
-# Download the privnet wallet, to have it handy for easy experimenting
-RUN wget https://s3.amazonaws.com/neo-experiments/neo-privnet.wallet
 
 # Add scripts
 ADD ./scripts/run.sh /opt/
 ADD ./scripts/start_consensus_node.sh /opt/
 ADD ./scripts/claim_neo_and_gas_fixedwallet.py /neo-python/
+ADD ./scripts/claim_gas_fixedwallet.py /neo-python/
 ADD ./wallets/neo-privnet.python-wallet /tmp/wallet
 
 # Some .bashrc helpers: 'neopy', and a welcome message for bash users
