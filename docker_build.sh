@@ -2,7 +2,7 @@
 set -e
 
 # To use a newer neo-cli version, just update this variable:
-NEO_CLI_VERSION="2.7.1"
+NEO_CLI_VERSION="2.7.4"
 
 function usage {
     echo "Usage: $0 [--no-cache] [--neo-cli <zip-fn>]"
@@ -37,7 +37,7 @@ done
 
 # Definition of standard neo-cli filenames and URL based on the version
 NEO_CLI_ZIPFN="neo-release-${NEO_CLI_VERSION}.zip"
-NEO_CLI_URL="https://github.com/neo-project/neo-cli/releases/download/v${NEO_CLI_VERSION}/neo-cli-ubuntu.16.04-x64.zip"
+NEO_CLI_URL="https://github.com/neo-project/neo-cli/releases/download/v${NEO_CLI_VERSION}/neo-cli-linux-x64.zip"
 
 if [ -z "$NEO_CLI_CUSTOM_ZIPFN" ]; then
     echo "Using downloaded neo-cli v${NEO_CLI_VERSION}"
@@ -52,7 +52,7 @@ if [ -z "$NEO_CLI_CUSTOM_ZIPFN" ]; then
     cp $NEO_CLI_ZIPFN ./neo-cli.zip
 else
     echo "Using custom neo-cli.zip: $NEO_CLI_CUSTOM_ZIPFN"
-    cp $NEO_CLI_CUSTOM_ZIPFN ./neo-cli.zip
+    mv $NEO_CLI_CUSTOM_ZIPFN ./neo-cli.zip
 fi
 
 if [ -z "$DISABLE_CACHE" ]; then
