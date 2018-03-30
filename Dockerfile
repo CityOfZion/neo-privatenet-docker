@@ -79,7 +79,7 @@ ADD ./scripts/claim_gas_fixedwallet.py /neo-python/
 ADD ./wallets/neo-privnet.python-wallet /tmp/wallet
 
 # Some .bashrc helpers: 'neopy', and a welcome message for bash users
-RUN echo "alias neopy=\"cd /neo-python && /usr/bin/python3.6 prompt.py -p\"" >> /root/.bashrc
+RUN echo "alias neopy=\"cd /neo-python && np-prompt -p\"" >> /root/.bashrc
 RUN echo "printf \"\n* Consensus nodes are running in screen sessions, check 'screen -ls'\"" >> /root/.bashrc
 RUN echo "printf \"\n* neo-python is installed in /neo-python, with a neo-privnet.wallet file in place\"" >> /root/.bashrc
 RUN echo "printf \"\n* You can use the alias 'neopy' in the shell to start neo-python's prompt.py with privnet settings\"" >> /root/.bashrc
