@@ -155,9 +155,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     settings.setup_privnet()
-    print("Blockchain DB path:", settings.LEVELDB_PATH)
+    print("Blockchain DB path:", settings.chain_leveldb_path)
 
-    blockchain = LevelDBBlockchain(settings.LEVELDB_PATH)
+    blockchain = LevelDBBlockchain(settings.chain_leveldb_path)
     Blockchain.RegisterBlockchain(blockchain)
 
     reactor.suggestThreadPoolSize(15)
