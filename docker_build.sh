@@ -52,7 +52,7 @@ if [ -z "$NEO_CLI_CUSTOM_ZIPFN" ]; then
     cp $NEO_CLI_ZIPFN ./neo-cli.zip
 else
     echo "Using custom neo-cli.zip: $NEO_CLI_CUSTOM_ZIPFN"
-    cp $NEO_CLI_CUSTOM_ZIPFN ./neo-cli.zip
+    mv $NEO_CLI_CUSTOM_ZIPFN ./neo-cli.zip
 fi
 
 if [ -z "$DISABLE_CACHE" ]; then
