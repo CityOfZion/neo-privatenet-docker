@@ -293,11 +293,11 @@ if __name__ == "__main__":
         exit(1)
 
     settings.setup_privnet()
-    print("Blockchain DB path:", settings.LEVELDB_PATH)
-    if os.path.exists(settings.LEVELDB_PATH):
-        print("Warning: Chain database already exists. If this is from a previous private network, you need to delete %s" % settings.LEVELDB_PATH)
+    print("Blockchain DB path:", settings.chain_leveldb_path)
+    if os.path.exists(settings.chain_leveldb_path):
+        print("Warning: Chain database already exists. If this is from a previous private network, you need to delete %s" % settings.chain_leveldb_path)
 
-    blockchain = LevelDBBlockchain(settings.LEVELDB_PATH)
+    blockchain = LevelDBBlockchain(settings.chain_leveldb_path)
     Blockchain.RegisterBlockchain(blockchain)
 
     reactor.suggestThreadPoolSize(15)
