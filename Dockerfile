@@ -39,6 +39,12 @@ RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
 
+# neo-python setup: clonse and install dependencies
+RUN git clone https://github.com/CityOfZion/neo-python.git /neo-python
+WORKDIR /neo-python
+# RUN git checkout development
+RUN pip3 install -e .
+
 # Add the neo-cli package
 ADD ./neo-cli.zip /opt/neo-cli.zip
 
@@ -64,12 +70,6 @@ ADD ./wallets/wallet3.json /opt/node3/neo-cli/
 ADD ./configs/config4.json /opt/node4/neo-cli/config.json
 ADD ./configs/protocol.json /opt/node4/neo-cli/protocol.json
 ADD ./wallets/wallet4.json /opt/node4/neo-cli/
-
-# neo-python setup: clonse and install dependencies
-RUN git clone https://github.com/CityOfZion/neo-python.git /neo-python
-WORKDIR /neo-python
-# RUN git checkout development
-RUN pip3 install -e .
 
 # Add scripts
 RUN wget https://s3.amazonaws.com/neo-experiments/neo-privnet.wallet
