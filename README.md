@@ -11,6 +11,12 @@ See the section below on extracting Neo and Gas as the private chain in this Doc
 
 You will also need to install and configure your neo client to use this private network, which involves editing the protocol.json file to point the seeds at your docker IP addresses.
 
+**Note:** If you are running Ubuntu on Windows (WSL), refer to this article to install and operate docker from Ubuntu:
+https://medium.com/@sebagomez/installing-the-docker-client-on-ubuntus-windows-subsystem-for-linux-612b392a44c4
+
+These instruction reference the official instructions from Docker found here: https://docs.docker.com/install/linux/docker-ce/ubuntu/.
+But, the steps following installation (after step 6) are required in order to run docker from Ubuntu.
+
 **Note:** There is also a turnkey Docker image with the initial 100M NEO and 16.6k GAS already claimed in a ready-to-use wallet available here: https://hub.docker.com/r/cityofzion/neo-privatenet
 
 
