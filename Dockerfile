@@ -1,5 +1,5 @@
 # NEO private network - Dockerfile
-FROM ubuntu:17.10
+FROM microsoft/dotnet:2.1.4-runtime-bionic
 
 LABEL maintainer="City of Zion"
 LABEL authors="metachris, ashant, hal0x2328, phetter"
@@ -28,13 +28,8 @@ RUN apt-get update && apt-get install -y \
     libleveldb-dev \
     libssl-dev \
     vim \
-    man
-
-# Setup microsoft repositories
-RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list'
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
+    man \
+    libunwind8
 
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
@@ -53,6 +48,9 @@ RUN unzip -q -d /opt/node1 /opt/neo-cli.zip
 RUN unzip -q -d /opt/node2 /opt/neo-cli.zip
 RUN unzip -q -d /opt/node3 /opt/neo-cli.zip
 RUN unzip -q -d /opt/node4 /opt/neo-cli.zip
+
+# Remove zip neo-cli package
+RUN rm /opt/neo-cli.zip
 
 # Add config files
 ADD ./configs/config1.json /opt/node1/neo-cli/config.json
