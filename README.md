@@ -2,14 +2,7 @@
 
 [![Build Status](https://travis-ci.org/CityOfZion/neo-privatenet-docker.svg?branch=master)](https://travis-ci.org/CityOfZion/neo-privatenet-docker)
 
-This is a convenient way to run a private Neo blockchain. The image is based on microsoft/dotnet:2.0-runtime,
-please review Dockerfile for details.
-
-This image is meant to skip the overhead of having to wait to get enough gas for smart contract testing on testnet and to bypass the steps of creating your own private chain.
-
-See the section below on extracting Neo and Gas as the private chain in this Docker image starts at block height 0.
-
-You will also need to install and configure your neo client to use this private network, which involves editing the protocol.json file to point the seeds at your docker IP addresses.
+This is a convenient way to run a private Neo blockchain. This image is meant to skip the overhead of having to wait to get enough gas for smart contract testing on testnet and to bypass the steps of creating your own private chain. See the section below on extracting Neo and Gas as the private chain in this Docker image starts at block height 0.
 
 **Note:** If you are running Ubuntu on Windows (WSL), refer to this article to install and operate docker from Ubuntu:
 https://medium.com/@sebagomez/installing-the-docker-client-on-ubuntus-windows-subsystem-for-linux-612b392a44c4
