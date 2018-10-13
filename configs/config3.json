@@ -2,6 +2,7 @@
     "ApplicationConfiguration": {
         "Paths": {
             "Chain": "Chain_{0}",
+            "Index": "Index_{0}",
             "ApplicationLogs": "ApplicationLogs_{0}"
         },
         "P2P": {
@@ -14,10 +15,10 @@
             "SslCertPassword": ""
         },
         "UnlockWallet": {
-            "Path": "",
-            "Password": "",
-            "StartConsensus": false,
-            "IsActive": false
+            "Path": "wallet3.json",
+            "Password": "three",
+            "StartConsensus": true,
+            "IsActive": true
         }
     }
 }
