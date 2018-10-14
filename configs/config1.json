@@ -1,18 +1,23 @@
 ﻿{
-  "ApplicationConfiguration": {
-    "Paths": {
-      "Chain": "Chain",
-      "Notifications": "Notifications"
-    },
-    "P2P": {
-      "Port": 20333,
-      "WsPort": 10333
-    },
-    "RPC": {
-      "Port": 30333,
-      "SslCert": "",
-      "SslCertPassword": ""
+    "ApplicationConfiguration": {
+        "Paths": {
+            "Chain": "Chain_{0}",
+            "ApplicationLogs": "ApplicationLogs_{0}"
+        },
+        "P2P": {
+            "Port": 20333,
+            "WsPort": 10333
+        },
+        "RPC": {
+            "Port": 30333,
+            "SslCert": "",
+            "SslCertPassword": ""
+        },
+        "UnlockWallet": {
+            "Path": "",
+            "Password": "",
+            "StartConsensus": false,
+            "IsActive": false
+        }
     }
-  }
 }
-
