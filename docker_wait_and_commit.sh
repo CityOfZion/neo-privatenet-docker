@@ -2,6 +2,7 @@
 #
 # Waits until a specific block (range) is reached, and then commits the Docker image.
 #
+SLEEP_TIME=60
 
 function usage {
     echo "Usage: $0 [--2k|--10k|--20k|--until-block <block-number-regex>]"
@@ -26,6 +27,7 @@ while [[ "$#" > 0 ]]; do case $1 in
         shift
         ;;
     --until-block)
+        SLEEP_TIME=10 # to prevent skipping the desired block
         if [ -z $2 ]; then usage; exit 1; fi
         UNTIL_BLOCK=$2
         shift
@@ -51,7 +53,7 @@ while true; do
     if [ $? -eq 0 ]; then
       break
     fi
-    sleep 30
+    sleep $SLEEP_TIME
 done
 
 echo "Reached block target of $UNTIL_BLOCK"
