@@ -2,7 +2,7 @@
 set -e
 
 # To use a newer neo-cli version, just update this variable:
-NEO_CLI_VERSION="2.9.0"
+NEO_CLI_VERSION="2.9.1"
 NEO_PLUGINS_VERSION="2.9.0"
 
 function usage {
