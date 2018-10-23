@@ -40,7 +40,7 @@ done
 NEO_CLI_ZIPFN="neo-release-${NEO_CLI_VERSION}.zip"
 NEO_CLI_URL="https://github.com/neo-project/neo-cli/releases/download/v${NEO_CLI_VERSION}/neo-cli-linux-x64.zip"
 NEO_PLUGIN_ZIPFN="SimplePolicy.zip"
-NEO_PLUGIN_URL="https://github.com/neo-project/neo-plugins/releases/download/v${NEO_CLI_VERSION}/SimplePolicy.zip"
+NEO_PLUGIN_URL="https://github.com/neo-project/neo-plugins/releases/download/v${NEO_PLUGINS_VERSION}/SimplePolicy.zip"
 
 if [ -z "$NEO_CLI_CUSTOM_ZIPFN" ]; then
     echo "Using downloaded neo-cli v${NEO_CLI_VERSION}"
