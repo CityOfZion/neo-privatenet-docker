@@ -2,7 +2,7 @@
 #
 # Waits until a specific block (range) is reached, and then commits the Docker image.
 #
-SLEEP_TIME=60
+SLEEP_TIME=30
 
 function usage {
     echo "Usage: $0 [--2k|--10k|--20k|--until-block <block-number-regex>]"
