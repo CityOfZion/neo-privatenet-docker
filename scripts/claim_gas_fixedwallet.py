@@ -20,13 +20,15 @@ from neocore.KeyPair import KeyPair
 from neo.Prompt.Commands.LoadSmartContract import ImportMultiSigContractAddr
 from neo.Core.Blockchain import Blockchain
 from neocore.Fixed8 import Fixed8
-from neo.Prompt.Commands.Send import construct_and_send
+from neo.Prompt.Commands.Send import construct_send_basic, process_transaction
 from neo.Prompt.Commands.Wallet import ClaimGas
 from neo.Core.TX.Transaction import TransactionOutput, ContractTransaction
 from neo.SmartContract.ContractParameterContext import ContractParametersContext
 from neo.Network.NodeLeader import NodeLeader
 from twisted.internet import reactor, task
 from neo.Settings import settings
+
+from mock import patch
 
 WALLET_PATH = "/tmp/privnet1"
 WALLET_PWD = "neo"
@@ -133,7 +135,10 @@ class PrivnetClaimall(object):
 
         print("\nSending NEO to own wallet...")
         address = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y"
-        tx = construct_and_send(None, self.wallet, ["neo", address, "100000000"], prompt_password=False)
+        with patch('neo.Prompt.Commands.Send.prompt', side_effect=["coz"]):
+            framework = construct_send_basic(self.wallet, ["neo", address, "100000000"])
+            tx = process_transaction(wallet, contract_tx=framework[0], scripthash_from=framework[1], fee=framework[2], owners=framework[3], user_tx_attributes=framework[4])
+
         if not tx:
             print("Something went wrong, no tx.")
             return
