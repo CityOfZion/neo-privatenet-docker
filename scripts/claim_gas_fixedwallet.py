@@ -137,7 +137,7 @@ class PrivnetClaimall(object):
         address = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y"
         with patch('neo.Prompt.Commands.Send.prompt', side_effect=["coz"]):
             framework = construct_send_basic(self.wallet, ["neo", address, "100000000"])
-            tx = process_transaction(wallet, contract_tx=framework[0], scripthash_from=framework[1], fee=framework[2], owners=framework[3], user_tx_attributes=framework[4])
+            tx = process_transaction(self.wallet, contract_tx=framework[0], scripthash_from=framework[1], fee=framework[2], owners=framework[3], user_tx_attributes=framework[4])
 
         if not tx:
             print("Something went wrong, no tx.")
