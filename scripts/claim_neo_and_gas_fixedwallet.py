@@ -257,7 +257,7 @@ class PrivnetClaimall(object):
 
             print("Importing multi-sig contract to {}".format(walletpath))
             
-            keys = list(nodekeys.keys()))
+            keys = list(nodekeys.keys())
             if keys[1]:
                 pubkey_script_hash = Crypto.ToScriptHash(pkey, unhex=True)	
                 verification_contract = Contract.CreateMultiSigContract(pubkey_script_hash, 3, keys)	
