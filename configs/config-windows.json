@@ -2,6 +2,7 @@
   "ApplicationConfiguration": {
     "Paths": {
       "Chain": "Chain",
+      "Index": "Index",
       "Notifications": "Notifications"
     },
     "P2P": {
@@ -9,6 +10,7 @@
       "WsPort": 10333
     },
     "RPC": {
+      "BindAddress": "0.0.0.0",
       "Port": 30333,
       "SslCert": "",
       "SslCertPassword": ""

@@ -42,6 +42,7 @@ RUN pip3 install -e .
 
 # Add the neo-cli package
 ADD ./neo-cli.zip /opt/neo-cli.zip
+ADD ./SimplePolicy.zip /opt/SimplePolicy.zip
 
 # Extract and prepare four consensus nodes
 RUN unzip -q -d /opt/node1 /opt/neo-cli.zip
@@ -49,8 +50,15 @@ RUN unzip -q -d /opt/node2 /opt/neo-cli.zip
 RUN unzip -q -d /opt/node3 /opt/neo-cli.zip
 RUN unzip -q -d /opt/node4 /opt/neo-cli.zip
 
+# Extract and prepare SimplePolicy plugin
+RUN unzip -q -d /opt/node1/neo-cli /opt/SimplePolicy.zip
+RUN unzip -q -d /opt/node2/neo-cli /opt/SimplePolicy.zip
+RUN unzip -q -d /opt/node3/neo-cli /opt/SimplePolicy.zip
+RUN unzip -q -d /opt/node4/neo-cli /opt/SimplePolicy.zip
+
 # Remove zip neo-cli package
 RUN rm /opt/neo-cli.zip
+RUN rm /opt/SimplePolicy.zip
 
 # Add config files
 ADD ./configs/config1.json /opt/node1/neo-cli/config.json
