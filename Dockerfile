@@ -38,6 +38,7 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/CityOfZion/neo-python.git /neo-python
 WORKDIR /neo-python
 # RUN git checkout development
+RUN git checkout v0.8.2
 RUN pip3 install -e .
 
 # Add the neo-cli package
