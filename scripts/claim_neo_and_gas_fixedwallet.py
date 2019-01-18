@@ -259,7 +259,7 @@ class PrivnetClaimall(object):
             
             keys = list(nodekeys.keys())
             if keys[1]:
-                pubkey_script_hash = Crypto.ToScriptHash(pkey, unhex=True)	
+                pubkey_script_hash = wallet.ToScriptHash(pkey)	
                 verification_contract = Contract.CreateMultiSigContract(pubkey_script_hash, 3, keys)	
                 wallet.AddContract(verification_contract)
 
