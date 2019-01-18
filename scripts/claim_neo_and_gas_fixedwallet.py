@@ -256,9 +256,12 @@ class PrivnetClaimall(object):
             wallet.CreateKey(prikey)
 
             print("Importing multi-sig contract to {}".format(walletpath))
-            multisig_args = [pkey, '3']
-            multisig_args.extend(list(nodekeys.keys()))
-            ImportMultiSigContractAddr(wallet, multisig_args)
+            
+            keys = list(nodekeys.keys()))
+            if keys[1]:
+                pubkey_script_hash = Crypto.ToScriptHash(pkey, unhex=True)	
+                verification_contract = Contract.CreateMultiSigContract(pubkey_script_hash, 3, keys)	
+                wallet.AddContract(verification_contract)
 
             dbloop = task.LoopingCall(wallet.ProcessBlocks)
             dbloop.start(1)
