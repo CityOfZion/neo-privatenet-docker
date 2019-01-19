@@ -40,13 +40,14 @@ from neo.Wallets.utils import to_aes_key
 from neo.Implementations.Wallets.peewee.UserWallet import UserWallet
 from neo.Implementations.Blockchains.LevelDB.LevelDBBlockchain import LevelDBBlockchain
 from neocore.KeyPair import KeyPair
-from neo.Prompt.Commands.LoadSmartContract import ImportMultiSigContractAddr
 from neo.Core.Blockchain import Blockchain
 from neocore.Fixed8 import Fixed8
+from neocore.Cryptography.Crypto import Crypto
 from neo.Prompt.Commands.Send import construct_send_basic, process_transaction
 from neo.Prompt.Commands.Wallet import ClaimGas
 from neo.Core.TX.Transaction import TransactionOutput, ContractTransaction
 from neo.SmartContract.ContractParameterContext import ContractParametersContext
+from neo.SmartContract.Contract import Contract
 from neo.Network.NodeLeader import NodeLeader
 from twisted.internet import reactor, task
 from neo.Settings import settings
@@ -256,9 +257,11 @@ class PrivnetClaimall(object):
             wallet.CreateKey(prikey)
 
             print("Importing multi-sig contract to {}".format(walletpath))
-            multisig_args = [pkey, '3']
-            multisig_args.extend(list(nodekeys.keys()))
-            ImportMultiSigContractAddr(wallet, multisig_args)
+            keys = list(nodekeys.keys())
+            pubkey_script_hash = Crypto.ToScriptHash(pkey, unhex=True)
+            verification_contract = Contract.CreateMultiSigContract(pubkey_script_hash, 3, keys)
+            wallet.AddContract(verification_contract)
+            print("Added multi-sig contract address %s to wallet" % verification_contract.Address)
 
             dbloop = task.LoopingCall(wallet.ProcessBlocks)
             dbloop.start(1)
