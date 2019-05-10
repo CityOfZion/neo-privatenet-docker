@@ -2,8 +2,8 @@
 set -e
 
 # To use a newer neo-cli version, just update this variable:
-NEO_CLI_VERSION="2.9.1"
-NEO_PLUGINS_VERSION="2.9.0"
+NEO_CLI_VERSION="2.10.1"
+NEO_PLUGINS_VERSION="2.10.1"
 
 function usage {
     echo "Usage: $0 [--no-cache] [--neo-cli <zip-fn>]"
@@ -41,6 +41,8 @@ NEO_CLI_ZIPFN="neo-release-${NEO_CLI_VERSION}.zip"
 NEO_CLI_URL="https://github.com/neo-project/neo-cli/releases/download/v${NEO_CLI_VERSION}/neo-cli-linux-x64.zip"
 NEO_PLUGIN_ZIPFN="SimplePolicy.zip"
 NEO_PLUGIN_URL="https://github.com/neo-project/neo-plugins/releases/download/v${NEO_PLUGINS_VERSION}/SimplePolicy.zip"
+NEO_APPLOG_ZIPFN="ApplicationLogs.zip"
+NEO_APPLOG_URL="https://github.com/neo-project/neo-plugins/releases/download/v${NEO_PLUGINS_VERSION}/ApplicationLogs.zip"
 
 if [ -z "$NEO_CLI_CUSTOM_ZIPFN" ]; then
     echo "Using downloaded neo-cli v${NEO_CLI_VERSION}"
@@ -50,8 +52,9 @@ if [ -z "$NEO_CLI_CUSTOM_ZIPFN" ]; then
         echo "- release already downloaded: ${NEO_CLI_ZIPFN}"
     else
         echo "- downloading ${NEO_CLI_URL}..."
-        wget --no-check-certificate -O $NEO_CLI_ZIPFN $NEO_CLI_URL || (rm -f $NEO_CLI_ZIPFN && exit 1)
-        wget --no-check-certificate -O $NEO_PLUGIN_ZIPFN $NEO_PLUGIN_URL || (rm -f $NEO_PLUGIN_ZIPFN && exit 1)
+        curl -L --output $NEO_CLI_ZIPFN $NEO_CLI_URL || (rm -f $NEO_CLI_ZIPFN && exit 1)
+        curl -L --output $NEO_PLUGIN_ZIPFN $NEO_PLUGIN_URL || (rm -f $NEO_PLUGIN_ZIPFN && exit 1)
+        curl -L --output $NEO_APPLOG_ZIPFN $NEO_APPLOG_URL || (rm -f $NEO_APPLOG_ZIPFN && exit 1)
     fi
     cp $NEO_CLI_ZIPFN ./neo-cli.zip
 else
