@@ -17,13 +17,14 @@ from neo.Wallets.utils import to_aes_key
 from neo.Implementations.Wallets.peewee.UserWallet import UserWallet
 from neo.Implementations.Blockchains.LevelDB.LevelDBBlockchain import LevelDBBlockchain
 from neocore.KeyPair import KeyPair
-from neo.Prompt.Commands.LoadSmartContract import ImportMultiSigContractAddr
 from neo.Core.Blockchain import Blockchain
 from neocore.Fixed8 import Fixed8
+from neocore.Cryptography.Crypto import Crypto
 from neo.Prompt.Commands.Send import construct_send_basic, process_transaction
 from neo.Prompt.Commands.Wallet import ClaimGas
 from neo.Core.TX.Transaction import TransactionOutput, ContractTransaction
 from neo.SmartContract.ContractParameterContext import ContractParametersContext
+from neo.SmartContract.Contract import Contract
 from neo.Network.NodeLeader import NodeLeader
 from twisted.internet import reactor, task
 from neo.Settings import settings
