@@ -1,9 +1,9 @@
 ﻿{
     "ApplicationConfiguration": {
         "Paths": {
-            "Chain": "/opt/chaindata/node3/Chain_{0}",
-            "Index": "/opt/chaindata/node3/Index_{0}",
-            "ApplicationLogs": "/opt/chaindata/node3/ApplicationLogs_{0}"
+            "Chain": "DATADIR/node3/Chain_{0}",
+            "Index": "DATADIR/node3/Index_{0}",
+            "ApplicationLogs": "DATADIR/node3/ApplicationLogs_{0}"
         },
         "P2P": {
             "Port": 20335,
