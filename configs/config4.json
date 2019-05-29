@@ -7,7 +7,8 @@
         },
         "P2P": {
             "Port": 20336,
-            "WsPort": 10336
+            "WsPort": 10336,
+            "MaxConnectionsPerAddress": 10
         },
         "RPC": {
             "BindAddress": "0.0.0.0",
