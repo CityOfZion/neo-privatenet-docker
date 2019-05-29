@@ -1,0 +1,5 @@
+{
+    "PluginConfiguration": {
+        "Path": "/opt/chaindata/node2/ApplicationLogs_{0}"
+    }
+}

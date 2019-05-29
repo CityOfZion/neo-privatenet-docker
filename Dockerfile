@@ -37,13 +37,15 @@ RUN rm -rf /var/lib/apt/lists/*
 # neo-python setup: clonse and install dependencies
 RUN git clone https://github.com/CityOfZion/neo-python.git /neo-python
 WORKDIR /neo-python
+
 # RUN git checkout development
 RUN pip3 install -e .
+RUN wget https://s3.amazonaws.com/neo-experiments/neo-privnet.wallet
 
 # Add the neo-cli package
 ADD ./neo-cli.zip /opt/neo-cli.zip
 ADD ./SimplePolicy.zip /opt/SimplePolicy.zip
-ADD ./ApplicationLogs.zip /opt/ApplicationLogs.zip 
+ADD ./ApplicationLogs.zip /opt/ApplicationLogs.zip
 
 # Extract and prepare four consensus nodes
 RUN unzip -q -d /opt/node1 /opt/neo-cli.zip
@@ -68,26 +70,44 @@ RUN rm /opt/neo-cli.zip
 RUN rm /opt/SimplePolicy.zip
 RUN rm /opt/ApplicationLogs.zip
 
+# Create chain data directories
+RUN mkdir -p /opt/chaindata/node1
+RUN mkdir -p /opt/chaindata/node2
+RUN mkdir -p /opt/chaindata/node3
+RUN mkdir -p /opt/chaindata/node4
+
 # Add config files
 ADD ./configs/config1.json /opt/node1/neo-cli/config.json
+ADD ./configs/config1.json /opt/node1/neo-cli/config.orig.json
 ADD ./configs/protocol.json /opt/node1/neo-cli/protocol.json
 ADD ./wallets/wallet1.json /opt/node1/neo-cli/
+ADD ./configs/config-applicationlogs1.json /opt/node1/neo-cli/Plugins/ApplicationLogs/config.json
+ADD ./configs/config-applicationlogs1.json /opt/node1/neo-cli/Plugins/ApplicationLogs/config.orig.json
 
 ADD ./configs/config2.json /opt/node2/neo-cli/config.json
+ADD ./configs/config2.json /opt/node2/neo-cli/config.orig.json
 ADD ./configs/protocol.json /opt/node2/neo-cli/protocol.json
 ADD ./wallets/wallet2.json /opt/node2/neo-cli/
+ADD ./configs/config-applicationlogs2.json /opt/node2/neo-cli/Plugins/ApplicationLogs/config.json
+ADD ./configs/config-applicationlogs2.json /opt/node2/neo-cli/Plugins/ApplicationLogs/config.orig.json
 
 ADD ./configs/config3.json /opt/node3/neo-cli/config.json
+ADD ./configs/config3.json /opt/node3/neo-cli/config.orig.json
 ADD ./configs/protocol.json /opt/node3/neo-cli/protocol.json
 ADD ./wallets/wallet3.json /opt/node3/neo-cli/
+ADD ./configs/config-applicationlogs3.json /opt/node3/neo-cli/Plugins/ApplicationLogs/config.json
+ADD ./configs/config-applicationlogs3.json /opt/node3/neo-cli/Plugins/ApplicationLogs/config.orig.json
 
 ADD ./configs/config4.json /opt/node4/neo-cli/config.json
+ADD ./configs/config4.json /opt/node4/neo-cli/config.orig.json
 ADD ./configs/protocol.json /opt/node4/neo-cli/protocol.json
 ADD ./wallets/wallet4.json /opt/node4/neo-cli/
+ADD ./configs/config-applicationlogs4.json /opt/node4/neo-cli/Plugins/ApplicationLogs/config.json
+ADD ./configs/config-applicationlogs4.json /opt/node4/neo-cli/Plugins/ApplicationLogs/config.orig.json
 
 # Add scripts
-RUN wget https://s3.amazonaws.com/neo-experiments/neo-privnet.wallet
 ADD ./scripts/run.sh /opt/
+ADD ./scripts/run_datadir_wrapper.sh /opt/
 ADD ./scripts/start_consensus_node.sh /opt/
 ADD ./scripts/claim_neo_and_gas_fixedwallet.py /neo-python/
 ADD ./scripts/claim_gas_fixedwallet.py /neo-python/
@@ -112,4 +132,4 @@ EXPOSE 30335
 EXPOSE 30336
 
 # On docker run, start the consensus nodes
-CMD ["/bin/bash", "/opt/run.sh"]
+CMD ["/bin/bash", "/opt/run_datadir_wrapper.sh"]

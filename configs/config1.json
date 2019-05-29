@@ -1,13 +1,14 @@
 ﻿{
     "ApplicationConfiguration": {
         "Paths": {
-            "Chain": "Chain_{0}",
-            "Index": "Index_{0}",
-            "ApplicationLogs": "ApplicationLogs_{0}"
+            "Chain": "/opt/chaindata/node1/Chain_{0}",
+            "Index": "/opt/chaindata/node1/Index_{0}",
+            "ApplicationLogs": "/opt/chaindata/node1/ApplicationLogs_{0}"
         },
         "P2P": {
             "Port": 20333,
-            "WsPort": 10333
+            "WsPort": 10333,
+            "MaxConnectionsPerAddress": 10
         },
         "RPC": {
             "BindAddress": "0.0.0.0",
