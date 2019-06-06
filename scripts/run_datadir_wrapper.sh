@@ -22,6 +22,7 @@ if [ -n "$DATADIR" ]; then
     if [ ! -d "$DATADIR" ] || [ ! -d "$DATADIR/node1" ] || [ ! -d "$DATADIR/node1/Chain_0000DDB1" ]; then
         echo "Copying consensus databases to $DATADIR ..."
         mkdir -p $DATADIR
+        rm -rf $DATADIR/node1 $DATADIR/node2 $DATADIR/node3 $DATADIR/node4  # Just in case one of them is already there
         cp -r /opt/chaindata/* $DATADIR/
     fi
 else
